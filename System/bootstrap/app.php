@@ -23,9 +23,11 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->setLocale(env('APP_LOCALE', 'pt_BR'));
 
-// $app->withEloquent();
+$app->withFacades();
+
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
