@@ -1,0 +1,39 @@
+.form__container{
+  height: 250px;
+}
+
+.form__container form{
+  height: 100%;
+}
+
+input[type=text], input[type=password]{
+  border: 0;
+  border-radius: 5px;
+  margin: 20px;
+  padding: 10px;
+  width: 300px;
+  height: 40px;
+  box-shadow: 3px 3px 10px -5px rgba(0,0,0,0.39);
+}
+
+input[type=text]:focus, input[type=password]:focus{
+  outline: 2px solid var(--secondary-color);
+}
+
+.form__btn{
+  border: 0;
+  border-radius: 5px;
+  width: 160px;
+  height: 50px;
+  font-size: 24px;
+  background: var(--secondary-color);
+  color: var(--light-color);
+  box-shadow: 3px 3px 10px -5px rgba(0,0,0,0.39);
+  cursor: pointer;
+}
+
+.form__btn:focus{
+  border: 0;
+  outline: none;
+  background: var(--primary-color);
+}

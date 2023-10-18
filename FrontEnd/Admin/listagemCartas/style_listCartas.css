@@ -1,0 +1,128 @@
+/* MENU */
+#menu{
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.menu__container{
+  border-radius: 8px;
+  margin: 10px;
+  position: relative;
+}
+
+.menu__closed{
+  border-radius: 8px;
+  padding: 10px;
+  width: 160px;
+  height: 50px;
+  font-size: 20px;
+  background: var(--tertiary-color);
+  color: var(--light-color);
+  cursor: pointer;
+  transition: ease-in-out .2s;
+}
+
+.menu__closed:hover{
+  transform: scale(1.025);
+  box-shadow: 3px 3px 10px -5px rgba(0,0,0,0.39);
+  transition: .2s;
+}
+
+.menu__closed img{
+  height: 35px;
+}
+
+.menu__nav{
+  border-radius: 8px;
+  display: none;
+  width: 100%;
+  list-style: none;
+  position: absolute;
+  z-index: 2;
+  box-shadow: 3px 3px 10px -5px rgba(0,0,0,0.39);
+}
+
+.menu__nav li{
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  background: white;
+}
+
+.menu__nav li:first-child{
+  border-radius: 8px 8px 0 0;
+}
+.menu__nav li:last-child{
+  border-top: 2px solid var(--light-color);
+  border-radius: 0 0 8px 8px;
+}
+.menu__nav li:focus{
+  filter: brightness(90%);
+}
+
+.menu__nav li a{
+  text-decoration: none;
+  color: black;
+}
+.menu__nav li a:focus{
+  color: var(--tertiary-color);
+}
+
+#menu:checked ~.menu__closed{
+  transform: scale(1.025);
+  box-shadow: 3px 3px 10px -5px rgba(0,0,0,0.39);
+}
+
+#menu:checked ~.menu__nav{
+  display: block;
+}
+
+/* CARD */
+.card{
+  border: 0;
+  border-radius: 8px;
+  margin: 10px;
+  width: 300px;
+  font-size: 18px;
+  box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.39);
+}
+
+.card .info{
+  padding: 15px;
+  min-height: 40px;
+}
+
+.card .info:nth-child(1n+2){
+  border-top: 2px solid rgb(204, 204, 204);
+}
+
+.info__message{
+  font-size: 16px;
+  min-height: 100px !important;
+}
+
+.card div p span{
+  font-weight: 500;
+  color: var(--secondary-color);
+}
+
+.card__status{
+  padding: 0 !important;
+}
+
+#status{
+  border-radius: 0 0 8px 8px;
+  border: 0;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+#status:focus{
+  filter: brightness(90%);
+}
