@@ -13,11 +13,14 @@ return new class extends Migration
     {
         Schema::create('Letters', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name_sender')->nullable();
-            $table->string('name_receiver');
-            $table->string('class_sender');
-            $table->string('class_receiver');
-            $table->enum('type', []);
+            $table->string('name_sender')->nullable()->max(150);
+            $table->string('course_sender')->max(10)->nullable();
+            $table->enum('year_sender', ['1', '2', '3'])->nullable();
+            $table->string('name_receiver')->max(150);
+            $table->string('course_receiver')->max(10)->nullable();
+            $table->enum('year_receiver', ['1','2','3'])->nullable();
+            $table->string('characteristics_receiver')->max(255)->nullable();
+            $table->enum('type', ['normal', 'especial'])->default('normal');
             $table->string('message')->max('255');
             $table->boolean('sent')->default(false);
             $table->timestamps();
