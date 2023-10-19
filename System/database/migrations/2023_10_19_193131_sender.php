@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Letters', function (Blueprint $table) {
+        Schema::create('Senders', function (Blueprint $table) {
             $table->id('id');
-            $table->enum('type', ['normal', 'especial'])->default('normal');
-            $table->string('message')->max('255');
-            $table->boolean('sent')->default(false);
-            $table->integer('candies');
+            $table->string('name')->max('255');
+            $table->string('course')->max('50');
+            $table->year('year');
+            $table->string('tel')->max('11');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(table: 'Letters');
+        Schema::dropIfExists('Senders');
     }
 };
