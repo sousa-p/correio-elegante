@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('Receivers', function (Blueprint $table) {
             $table->id('id');
             $table->string('name')->max('255');
-            $table->string('course')->max('50');
-            $table->year('year');
-            $table->string('characteristics');
+            $table->string('course')->max('50')->nullable();
+            $table->enum('year', ['1', '2', '3'])->nullable();
+            $table->string('characteristics')->max('200');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Receivers');
+        Schema::dropIfExists(table: 'Receivers');
     }
 };

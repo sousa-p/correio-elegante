@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('message')->max('255');
             $table->boolean('sent')->default(false);
             $table->integer('candies');
+            $table->bigInteger('receiver_id');
+            $table->bigInteger('sender_id');
+            $table->index('Senders');
+            $table->index('Receivers');
             $table->timestamps();
         });
     }

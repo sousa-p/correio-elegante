@@ -16,17 +16,19 @@ class LettersSeeder extends Seeder
     {
         $faker = Factory::create();
 
-        DB::table('Letters')->insert([
-            'name_sender' => $faker->name(),
-            'course_sender' => $faker->word(),
-            'year_sender' => $faker->randomElement(['1', '2', '3']),
-            'name_receiver' => $faker->name(),
-            'course_receiver' => $faker->word(),
-            'year_receiver' => $faker->randomElement(['1', '2', '3']),
-            'characteristics_receiver' => $faker->text(150),
-            'type' => $faker->randomElement(['normal', 'especial']),
-            'message' => $faker->text(),
-            'sent' => $faker->boolean(),
-        ]);
+        $senders = DB::table('Senders')->pluck('id')->toArray();
+        $receivers = DB::table('Receivers')->pluck('id')->toArray();
+
+
+        for ($i = 0; $i < 10; $i++) {
+            DB::table('Letters')->insert([
+                'type' => $faker->randomElement(['normal', 'especial']),
+                'message' => $faker->text(),
+                'sent' => $faker->boolean(),
+                'candies' => $faker->numberBetween(0, 10),
+                'receiver_id' => $faker->randomElement($receivers),
+                'sender_id' => $faker->randomElement($senders),
+            ]);
+        }
     }
 }

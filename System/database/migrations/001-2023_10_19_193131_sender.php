@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('Senders', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name')->max('255');
-            $table->string('course')->max('50');
-            $table->year('year');
+            $table->string('name')->max('255')->nullable();
+            $table->string('course')->max('50')->nullable();
+            $table->enum('year', ['1', '2', '3'])->nullable();
             $table->string('tel')->max('11');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Senders');
+        Schema::dropIfExists(table: 'Senders');
     }
 };

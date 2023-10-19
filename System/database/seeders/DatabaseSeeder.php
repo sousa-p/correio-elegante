@@ -14,10 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 10; $i++) {
-            $this->call([
-                LettersSeeder::class,
-            ]);
-        }
+        $this->call([
+            SendersSeeder::class,
+            ReceiverSeeder::class,
+            LettersSeeder::class,
+            AdminsSeeder::class
+        ]);
     }
 }

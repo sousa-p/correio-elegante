@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Letter extends Model
+class Receiver extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -16,7 +16,7 @@ class Letter extends Model
         'name',
         'course',
         'year',
-        'tel',
+        'characteristics',
     ];
 
     /**
@@ -31,18 +31,8 @@ class Letter extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function sender(): HasOne
+    public function letter(): HasOne
     {
-        return $this->hasOne(Sender::class);
-    }
-
-    /**
-     * Get the receiver associated with the Letter
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function receiver(): HasOne
-    {
-        return $this->hasOne(Receiver::class);
+        return $this->hasOne(Letter::class);
     }
 }
