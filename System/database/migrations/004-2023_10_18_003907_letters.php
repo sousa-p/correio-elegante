@@ -16,9 +16,9 @@ return new class extends Migration
             $table->enum('type', ['normal', 'especial'])->default('normal');
             $table->string('message')->max('255');
             $table->boolean('sent')->default(false);
-            $table->integer('candies');
-            $table->bigInteger('receiver_id');
-            $table->bigInteger('sender_id');
+            $table->boolean('recited')->default(false);
+            $table->unsignedBigInteger('receiver_id');
+            $table->unsignedBigInteger('sender_id');
             $table->index('Senders');
             $table->index('Receivers');
             $table->timestamps();

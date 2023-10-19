@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Receiver extends Model
@@ -27,12 +28,12 @@ class Receiver extends Model
     protected $hidden = [];
 
     /**
-     * Get the sender associated with the Letter
+     * Get the letter that owns the Sender
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function letter(): HasOne
+    public function letter(): BelongsTo
     {
-        return $this->hasOne(Letter::class);
+        return $this->belongsTo(Letter::class);
     }
 }

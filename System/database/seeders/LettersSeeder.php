@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Candy;
+use App\Models\Letter;
 use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -19,16 +21,22 @@ class LettersSeeder extends Seeder
         $senders = DB::table('Senders')->pluck('id')->toArray();
         $receivers = DB::table('Receivers')->pluck('id')->toArray();
 
+        for ($i = 0; $i < 5; $i++) {
 
-        for ($i = 0; $i < 10; $i++) {
-            DB::table('Letters')->insert([
+            $letter = Letter::create([
                 'type' => $faker->randomElement(['normal', 'especial']),
                 'message' => $faker->text(),
                 'sent' => $faker->boolean(),
-                'candies' => $faker->numberBetween(0, 10),
+                'recited' => $faker->boolean(),
                 'receiver_id' => $faker->randomElement($receivers),
-                'sender_id' => $faker->randomElement($senders),
+                'sender_id' => $faker->randomElement($senders)
             ]);
+
+            $letter->save();
+
+            $randomCandies = Candy::inRandomOrder()->limit($faker->randomNumber())->get();
+
+            $letter->candies()->attach($randomCandies);
         }
     }
 }

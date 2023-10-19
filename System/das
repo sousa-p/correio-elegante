@@ -1,0 +1,13 @@
+[90m= [39m[34;4mApp\Models\Letter[39;24m {#6625
+    [34mid[39m: [35m1[39m,
+    [34mtype[39m: "[32mnormal[39m",
+    [34mmessage[39m: "[32mQuo eos voluptas officia rerum modi. Ut incidunt voluptate vel dolorem est magni voluptas in. Enim voluptas et dolorem amet quo natus eos.[39m",
+    [34msent[39m: [35m0[39m,
+    [34mrecited[39m: [35m0[39m,
+    [34mreceiver_id[39m: [35m1[39m,
+    [34msender_id[39m: [35m9[39m,
+    [34mcandy_id[39m: [36mnull[39m,
+    [34mcreated_at[39m: "[32m2023-10-19 22:11:25[39m",
+    [34mupdated_at[39m: "[32m2023-10-19 22:11:25[39m",
+  }
+

@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Sender extends Model
+class Candy extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -14,9 +14,7 @@ class Sender extends Model
      */
     protected $fillable = [
         'name',
-        'course',
-        'year',
-        'tel',
+        'value',
     ];
 
     /**
@@ -27,12 +25,12 @@ class Sender extends Model
     protected $hidden = [];
 
     /**
-     * Get the letter that owns the Sender
+     * The letters that belong to the Candy
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function letter(): BelongsTo
+    public function letters(): BelongsToMany
     {
-        return $this->belongsTo(Letter::class);
+        return $this->belongsToMany(Letter::class);
     }
 }

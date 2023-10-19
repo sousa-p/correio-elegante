@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Letter extends Model
@@ -44,5 +45,15 @@ class Letter extends Model
     public function receiver(): HasOne
     {
         return $this->hasOne(Receiver::class);
+    }
+
+    /**
+     * Get all of the candies for the Letter
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function candies(): BelongsToMany
+    {
+        return $this->belongsToMany(Candy::class);
     }
 }
