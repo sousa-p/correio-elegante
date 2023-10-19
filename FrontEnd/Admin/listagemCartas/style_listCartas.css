@@ -1,5 +1,5 @@
 /* MENU */
-#menu{
+#menu, #card-closed{
   position: absolute;
   visibility: hidden;
   opacity: 0;
@@ -23,7 +23,7 @@
   transition: ease-in-out .2s;
 }
 
-.menu__closed:hover{
+.menu__closed:focus{
   transform: scale(1.025);
   box-shadow: 3px 3px 10px -5px rgba(0,0,0,0.39);
   transition: .2s;
@@ -87,27 +87,34 @@
   border-radius: 8px;
   margin: 10px;
   width: 300px;
-  font-size: 18px;
   box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.39);
 }
 
-.card .info{
+.card__content{
+  display: none;
+}
+
+.info, .card__label{
   padding: 15px;
   min-height: 40px;
 }
 
-.card .info:nth-child(1n+2){
+.info{
   border-top: 2px solid rgb(204, 204, 204);
 }
 
-.info__message{
+.text{
   font-size: 16px;
-  min-height: 100px !important;
 }
 
-.card div p span{
+.title{
+  margin-right: 5px !important;
   font-weight: 500;
   color: var(--secondary-color);
+}
+
+.info__message{
+  min-height: 100px !important;
 }
 
 .card__status{
@@ -121,8 +128,16 @@
   width: 100%;
   height: 100%;
   outline: none;
+  border-top: 2px solid rgb(204, 204, 204);
 }
 
 #status:focus{
   filter: brightness(90%);
+}
+
+#card-closed:checked ~.card .card__content{
+  display: block;
+}
+#card-closed:checked ~.card{
+  outline: 2px solid var(--primary-color);
 }
