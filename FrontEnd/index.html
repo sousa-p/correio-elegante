@@ -5,17 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="./assets/css/main.css">
+  <link rel="stylesheet" href="./assets/css/style_cliente.css">
   <title>Document</title>
 </head>
 <body class="d-flex flex-column justify-content-center align-items-center">
   <header>
     <div class="logo">
-      <img src="../../assets/img/imagem.jpeg" alt="logo">
+      <img src="./assets/img/download.jfif" alt="logo">
     </div>
   </header>
 
   <main>
-    <h1>Mande uma mensagem para alguém! <3</h1>
+    <h1 class="title">Mande uma mensagem para alguém! ❤ </h1>
     <div class="disclaimer">
       <p>Cada bilhete custa R$00,00 com adicional caso queria adicionar um docinho! c:
         Aceitamos apenas pedidos por pix, caso prefira pagamento em dinheiro faça seu pedido direto no ponto de venda localizado no *insira local de venda*.</p>
@@ -23,28 +24,38 @@
 
     <div class="form__container">
       <form action="" class="d-flex flex-column justify-content-between align-items-center">
-        <div class="d-flex flex-column align-items-center">
-          <div class="d-flex">
-            <input type="text" id="name-recipient" placeholder="Destinatário">
-            <input type="text" id="class-recipient" placeholder="Sala">
+        <div class="d-flex flex-column align-items-center w-100">
+          
+          <div class="d-flex justify-content-around">
+            <input type="text" id="name-sender" class="name" placeholder="Seu nome">
+            <input type="text" id="class-sender" class="classroom" placeholder="Sala">
+          </div>
+
+          <div class="d-flex flex-column align-items-center">
+            <div class="d-flex justify-content-around">
+              <input type="text" id="name-recipient" class="name" placeholder="Destinatário">
+              <input type="text" id="class-recipient" class="classroom" placeholder="Sala">
+            </div>
+            <textarea name="caracteristicas" id="" class="message__field" placeholder="Descreva características do destinatário para identificarmos..."></textarea>
           </div>
 
           <div class="message">
-            <button>Adicionar Mensagem</button>
-            <textarea name="" id="" cols="30" rows="10" placeholder="Escreva sua mensagem..."></textarea>
+            <div class="message__btn d-flex flex-column justify-content-center align-items-center">
+              <button type="button" class="message__btn-add w-100">Escrever Mensagem</button>
+              <button type="button" class="message__btn-remove">
+                Excluir Mensagem
+                <img src="./assets/img/minus-outline.svg" alt="">
+              </button>
+            </div>
+            <textarea name="mensagem" id="" class="message__field" placeholder="Escreva sua mensagem..."></textarea>
           </div>
 
-          <div class="">
+          <div class="w-100">
             <input type="checkbox" name="" id="option-anonymous">
             <label for="option-anonymous">Quer ser anônimo?</label>
           </div>
 
-          <div class="d-flex">
-            <input type="text" id="name-recipient" placeholder="Seu nome">
-            <input type="text" id="class-recipient" placeholder="Sala">
-          </div>
-
-          <div class="combos">
+          <div class="combos w-100">
             <button>Adicionar Doce</button>
             <div class="d-flex">
               <select name="" id="">
@@ -62,6 +73,7 @@
       </form>
     </div>
   </main>
+  <script src="./assets/js/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>

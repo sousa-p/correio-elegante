@@ -1,0 +1,74 @@
+.title{
+    margin: 0;
+    width: 320px;
+    text-align: center;
+    font-size: 28px;
+}
+
+.disclaimer{
+    margin: 30px 0;
+    width: 90%;
+    border-radius: 8px;
+    padding: 10px;
+    background: var(--quaternary-color);
+}
+
+input[type=text], 
+select, textarea{
+    margin: 10px 0;
+}
+
+.name{
+    width: 70%;
+}
+.classroom{
+    width: 25%;
+}
+
+.message{
+    width: 95%;
+}
+
+.message .message__field{
+    display: none;
+}
+
+.message__btn-add{
+    border: 0;
+    border-radius: 8px;
+    margin: 20px 0;
+    width: 90%;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: 0 6px 0 var(--primary-color);
+    background: var(--secondary-color);
+    color: var(--light-color);
+}
+
+.message__btn-add:focus{
+    outline: none;
+    transform: translateY(2px);
+    box-shadow: 0 4px 0 var(--primary-color);
+}
+
+.message__btn-remove{
+    display: none;
+    margin: 10px 0;
+    border: 0;
+    font-weight: 600;
+    background: transparent;
+    color: var(--secondary-color);
+}
+
+.message__btn-remove img{
+    height: 30px;
+}
+
+.message__field{
+    margin: 10px 0;
+    min-width: 310px;
+    min-height: 15vh;
+    max-height: 15vh;
+}

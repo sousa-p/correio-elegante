@@ -9,8 +9,12 @@ divCardsClosed.forEach((element, i) => {
   element.addEventListener("click", () => {
     classes.toggle("content__d-none");
 
-    card.style.outline = 
+    card.style.border = 
     (!classes.contains("content__d-none")) 
     ? "2px solid var(--tertiary-color)" : "0";
+
+    element.style.borderRadius =
+    (!classes.contains("content__d-none")) 
+    ? "0" : null;
   });
 });
