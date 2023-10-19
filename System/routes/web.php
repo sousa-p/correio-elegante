@@ -13,6 +13,12 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
+/*
+|--------------------------------------------------------------------------
+| Letters Routes
+|--------------------------------------------------------------------------
+*/
+
+$router->group(['prefix'=> '/letters'], function () use ($router) {
+    $router->get('/','LetterController@index');
 });

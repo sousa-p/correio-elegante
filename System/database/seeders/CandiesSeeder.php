@@ -19,7 +19,7 @@ class CandiesSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             DB::table('Candies')->insert([
                 'name' => $faker->name(),
-                'value' => $faker->randomFloat(3,0,0),
+                'value' => $faker->randomFloat(3,0.1, 99.99),
             ]);
         }
     }
