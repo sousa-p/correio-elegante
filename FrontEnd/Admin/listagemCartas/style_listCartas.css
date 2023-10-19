@@ -1,3 +1,8 @@
+/* HEADER */
+header{
+  margin: 40px 0;
+}
+
 /* MENU */
 #menu, #card-closed{
   position: absolute;
@@ -7,7 +12,7 @@
 
 .menu__container{
   border-radius: 8px;
-  margin: 10px;
+  height: 100%;
   position: relative;
 }
 
@@ -82,6 +87,10 @@
 }
 
 /* CARD */
+.cards__container{
+  padding-bottom: 40px;
+}
+
 .card{
   border: 0;
   border-radius: 8px;
@@ -90,21 +99,22 @@
   box-shadow: 0px 3px 10px -2px rgba(0,0,0,0.39);
 }
 
-.card__content{
+.content__d-none{
   display: none;
 }
 
-.info, .card__label{
+.info, .card__closed{
   padding: 15px;
   min-height: 40px;
 }
 
-.info{
-  border-top: 2px solid rgb(204, 204, 204);
+.card__closed{
+  border-radius: 8px 8px 0 0;
+  background: var(--tertiary-color);
 }
 
-.text{
-  font-size: 16px;
+.info{
+  border-top: 2px solid rgb(204, 204, 204);
 }
 
 .title{
@@ -113,12 +123,16 @@
   color: var(--secondary-color);
 }
 
-.info__message{
-  min-height: 100px !important;
+.text{
+  font-size: 16px;
 }
 
-.card__status{
-  padding: 0 !important;
+.card__closed .title, .card__closed .text{
+  color: var(--light-color);
+}
+
+.info__message{
+  min-height: 100px !important;
 }
 
 #status{
@@ -133,11 +147,4 @@
 
 #status:focus{
   filter: brightness(90%);
-}
-
-#card-closed:checked ~.card .card__content{
-  display: block;
-}
-#card-closed:checked ~.card{
-  outline: 2px solid var(--primary-color);
 }

@@ -1,8 +1,9 @@
 :root{
-  --primary-color   : #8C0303;
-  --secondary-color : #D93030;
-  --tertiary-color  : #E66D5E;
-  --light-color     : #F2F2F2;
+  --primary-color    : #8C0303;
+  --secondary-color  : #D93030;
+  --tertiary-color   : #E66D5E;
+  --quaternary-color : #ffcac3;
+  --light-color      : #F2F2F2;
 }
 
 *{
@@ -19,6 +20,7 @@ body{
 main{
   margin: 10px;
   max-width: 400px;
+  height: 100%;
 }
 
 p{
