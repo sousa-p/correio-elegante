@@ -15,10 +15,33 @@
 
 /*
 |--------------------------------------------------------------------------
-| Letters Routes
+| Admin Routes
 |--------------------------------------------------------------------------
 */
 
-$router->group(['prefix'=> '/letters'], function () use ($router) {
+$router->group(['login'=> '/admin'], function () use ($router) {
+    $router->get('/login','AdminController@login');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Letter Routes
+|--------------------------------------------------------------------------
+*/
+
+$router->group(['prefix'=> '/letter'], function () use ($router) {
     $router->get('/','LetterController@index');
+    $router->post('/store','LetterController@store');
+});
+
+
+/*
+|--------------------------------------------------------------------------
+| Candy Routes
+|--------------------------------------------------------------------------
+*/
+
+$router->group(['prefix'=> '/candy'], function () use ($router) {
+    $router->get('/','CandyController@index');
 });
