@@ -27,6 +27,8 @@ class Receiver extends Model
      */
     protected $hidden = [];
 
+    public $timestamps = false;
+
     /**
      * Get the letter that owns the Sender
      *

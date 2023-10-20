@@ -14,10 +14,10 @@ class Letter extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'course',
-        'year',
-        'tel',
+        'message',
+        'sent',
+        'sender_id',
+        'receiver_id'
     ];
 
     /**

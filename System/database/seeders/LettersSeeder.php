@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Additional;
-use App\Models\Candy;
 use App\Models\Letter;
 use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -25,10 +24,8 @@ class LettersSeeder extends Seeder
         for ($i = 0; $i < 5; $i++) {
 
             $letter = Letter::create([
-                'type' => $faker->randomElement(['normal', 'especial']),
                 'message' => $faker->text(),
                 'sent' => $faker->boolean(),
-                'recited' => $faker->boolean(),
                 'receiver_id' => $faker->randomElement($receivers),
                 'sender_id' => $faker->randomElement($senders)
             ]);

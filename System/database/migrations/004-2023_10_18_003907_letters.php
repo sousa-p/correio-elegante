@@ -13,10 +13,8 @@ return new class extends Migration
     {
         Schema::create('Letters', function (Blueprint $table) {
             $table->id('id');
-            $table->enum('type', ['normal', 'especial'])->default('normal');
             $table->string('message')->max('255');
             $table->boolean('sent')->default(false);
-            $table->boolean('recited')->default(false);
             $table->unsignedBigInteger('receiver_id');
             $table->unsignedBigInteger('sender_id');
             $table->index('Senders');

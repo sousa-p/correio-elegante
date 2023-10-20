@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
 
 class AdminController extends Controller
 {
-    public function login(Request $request) {
+    public function login(Request $request) 
+    {
         $this->validate($request, [
             'login' => ['required', 'string', 'max:255', 'exists:Admins'],
             'password' => ['required', 'string', 'max:255', 'min:8'],
