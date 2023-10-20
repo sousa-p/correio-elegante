@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Additional;
 use App\Models\Letter;
 use App\Models\Receiver;
 use App\Models\Sender;
@@ -20,27 +21,29 @@ class LetterController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'message' => ['required', 'string', 'max:255'],
+            'message' => ['required', 'string', 'max:255', 'min:1'],
             'sender_name' => ['string', 'max:255'],
             'sender_course' => ['string', 'max:255'],
             'sender_year' => ['string', Rule::in(['1', '2', '3'])],
-            'sender_tel' => ['required', 'string', 'max:11'],
-            'receiver_name' => ['required', 'string','max:255'],
+            'sender_tel' => ['required', 'string', 'size:11'],
+            'receiver_name' => ['required', 'string', 'max:255'],
             'receiver_course' => ['required', 'string', 'max:255'],
             'receiver_year' => ['required', 'string', Rule::in(['1', '2', '3'])],
-            'receiver_characteristics' => ['required', 'string', 'max:200']
+            'receiver_characteristics' => ['required', 'string', 'max:200', 'min:1'],
+            'additionals' => ['required', 'array'],
+            'additionals.*' => ['exists:Additionals,id']
         ]);
 
         $sender = Sender::create([
-            'name'=> ucwords($request->input('sender_name')),
-            'course'=> strToUpper($request->input('sender_course')),
+            'name' => ucwords($request->input('sender_name')),
+            'course' => strToUpper($request->input('sender_course')),
             'year' => $request->input('sender_year'),
             'tel' => $request->input('sender_tel'),
         ]);
 
         $receiver = Receiver::create([
-            'name'=> ucwords($request->input('receiver_name')),
-            'course'=> strToUpper($request->input('receiver_course')),
+            'name' => ucwords($request->input('receiver_name')),
+            'course' => strToUpper($request->input('receiver_course')),
             'year' => $request->input('receiver_year'),
             'characteristics' => $request->input('receiver_characteristics'),
         ]);
@@ -48,10 +51,65 @@ class LetterController extends Controller
         $letter = Letter::create([
             'message' => ucfirst($request->input('message')),
             'sent' => false,
-            'sender_id'=> $sender->id,
+            'sender_id' => $sender->id,
             'receiver_id' => $receiver->id
         ]);
 
+        $additionals = Additional::whereIn('id', $request->input('additionals'))->get();
+
+        $letter->Additionals()->attach($additionals);
+
         return response()->json($letter, 201);
+    }
+
+    public function storeCouple(Request $request)
+    {
+        $this->validate($request, [
+            'messages' => ['required', 'array', 'size:2'],
+            'messages.*' => ['required', 'string', 'max:255', 'min:1'],
+            'sender_name' => ['string', 'max:255'],
+            'sender_course' => ['string', 'max:255'],
+            'sender_year' => ['string', Rule::in(['1', '2', '3'])],
+            'sender_tel' => ['required', 'string', 'size:11'],
+            'receivers_names' => ['required', 'array', 'size:2'],
+            'receivers_names.*' => ['required', 'string', 'max:255'],
+            'receivers_courses' => ['required', 'array', 'size:2'],
+            'receivers_courses.*' => ['string', 'max:255'],
+            'receivers_years' => ['required', 'array', 'size:2'],
+            'receivers_years.*' => ['string', Rule::in(['1', '2', '3'])],
+            'receivers_characteristics' => ['required', 'array', 'size:2'],
+            'receivers_characteristics.*' => ['required', 'string', 'max:200', 'min:1'],
+            'additional' => ['required', 'exists:Additionals,id']
+        ]);
+
+        $sender = Sender::create([
+            'name' => ucwords($request->input('sender_name')),
+            'course' => strToUpper($request->input('sender_course')),
+            'year' => $request->input('sender_year'),
+            'tel' => $request->input('sender_tel'),
+        ]);
+
+        $letters = [];
+        $additional = Additional::where('id', $request->input('additionals'))->first();
+
+        for ($i = 0; $i < 2; $i++) {
+            $receiver = Receiver::create([
+                'name' => ucwords($request->input('receivers_names')[$i]),
+                'course' => strToUpper($request->input('receivers_courses')[$i]),
+                'year' => $request->input('receivers_years')[$i],
+                'characteristics' => $request->input('receivers_characteristics')[$i],
+            ]);
+
+            $letter = Letter::create([
+                'message' => ucfirst($request->input('messages')[$i]),
+                'sent' => false,
+                'sender_id' => $sender->id,
+                'receiver_id' => $receiver->id
+            ]);
+            $letter->Additionals()->attach($additional);
+            $letters[] = $letter;
+        }
+
+        return response()->json($letters, 201);
     }
 }
