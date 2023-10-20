@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Candy;
+use App\Models\Additional;
 use Illuminate\Http\Request;
 
-class CandyController extends Controller
+class AdditionalController extends Controller
 {
     public function index() {
-        $candies = Candy::all();
-        return response()->json($candies);
+        $additionals = Additional::all();
+        return response()->json($additionals);
     }
 
     public function store(Request $request) {

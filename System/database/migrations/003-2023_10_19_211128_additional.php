@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('id');
             $table->string('name')->max('255');
             $table->float('value');
-            $table->timestamps();
         });
     }
 
