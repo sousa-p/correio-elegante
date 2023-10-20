@@ -19,8 +19,8 @@
 |--------------------------------------------------------------------------
 */
 
-$router->group(['login'=> '/admin'], function () use ($router) {
-    $router->get('/login','AdminController@login');
+$router->group(['prefix'=> '/admin'], function () use ($router) {
+    $router->post('/login','AdminController@login');
 });
 
 
