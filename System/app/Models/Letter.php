@@ -48,12 +48,12 @@ class Letter extends Model
     }
 
     /**
-     * Get all of the candies for the Letter
+     * Get all of the additionals for the Letter
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function candies(): BelongsToMany
+    public function additionals(): BelongsToMany
     {
-        return $this->belongsToMany(Candy::class);
+        return $this->belongsToMany(Additional::class);
     }
 }

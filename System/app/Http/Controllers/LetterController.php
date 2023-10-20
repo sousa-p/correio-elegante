@@ -10,7 +10,7 @@ class LetterController extends Controller
 
     public function index()
     {
-        $letters = Letter::with('receiver', 'sender', 'candies')->get();
+        $letters = Letter::with('receiver', 'sender', 'additionals')->get();
         return response()->json($letters);
     }
 }

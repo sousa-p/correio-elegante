@@ -38,10 +38,10 @@ $router->group(['prefix'=> '/letter'], function () use ($router) {
 
 /*
 |--------------------------------------------------------------------------
-| Candy Routes
+| Additional Routes
 |--------------------------------------------------------------------------
 */
 
-$router->group(['prefix'=> '/candy'], function () use ($router) {
-    $router->get('/','CandyController@index');
+$router->group(['prefix'=> '/additional'], function () use ($router) {
+    $router->get('/','AdditionalController@index');
 });

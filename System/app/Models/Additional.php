@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Candy extends Model
+class Additional extends Model
 {
     /**
      * The attributes that are mass assignable.

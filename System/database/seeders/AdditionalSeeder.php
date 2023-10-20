@@ -7,7 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CandiesSeeder extends Seeder
+class AdditionalSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,7 +17,7 @@ class CandiesSeeder extends Seeder
         $faker = Factory::create();
 
         for ($i = 0; $i < 10; $i++) {
-            DB::table('Candies')->insert([
+            DB::table('Additionals')->insert([
                 'name' => $faker->name(),
                 'value' => $faker->randomFloat(3,0.1, 99.99),
             ]);

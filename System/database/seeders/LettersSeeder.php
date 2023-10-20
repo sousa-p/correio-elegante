@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Additional;
 use App\Models\Candy;
 use App\Models\Letter;
 use Faker\Factory;
@@ -34,9 +35,9 @@ class LettersSeeder extends Seeder
 
             $letter->save();
 
-            $randomCandies = Candy::inRandomOrder()->limit($faker->randomNumber())->get();
+            $randomAdditionals = Additional::inRandomOrder()->limit($faker->randomNumber())->get();
 
-            $letter->candies()->attach($randomCandies);
+            $letter->Additionals()->attach($randomAdditionals);
         }
     }
 }
