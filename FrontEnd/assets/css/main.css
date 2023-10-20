@@ -46,3 +46,24 @@ select, textarea{
   height: 40px;
   box-shadow: 3px 3px 10px -5px rgba(0,0,0,0.39);
 }
+
+.form__btn{
+  border: 0;
+  border-radius: 8px;
+  margin: 20px;
+  width: 160px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  box-shadow: 0 6px 0 var(--primary-color);
+  background: var(--secondary-color);
+  color: var(--light-color);
+  cursor: pointer;
+}
+
+.form__btn:focus{
+  outline: none;
+  transform: translateY(2px);
+  box-shadow: 0 4px 0 var(--primary-color);
+}

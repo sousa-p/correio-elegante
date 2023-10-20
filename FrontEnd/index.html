@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./assets/css/main.css">
   <link rel="stylesheet" href="./assets/css/style_cliente.css">
-  <title>Document</title>
+  <title>Escreva sua mensagem</title>
 </head>
-<body class="d-flex flex-column justify-content-center align-items-center">
+<body class="d-flex flex-column align-items-center">
   <header>
     <div class="logo">
       <img src="./assets/img/download.jfif" alt="logo">
@@ -16,54 +17,94 @@
   </header>
 
   <main>
-    <h1 class="title">Mande uma mensagem para alguém! ❤ </h1>
+    <h1 class="title">Mande uma mensagem para alguém! ❤</h1>
     <div class="disclaimer">
-      <p>Cada bilhete custa R$00,00 com adicional caso queria adicionar um docinho! c:
-        Aceitamos apenas pedidos por pix, caso prefira pagamento em dinheiro faça seu pedido direto no ponto de venda localizado no *insira local de venda*.</p>
+      <p>Cada bilhete custa R$00,00 com adicional caso queria adicionar um docinho! 😋</p>
+      <p>Aceitamos apenas pedidos por pix, caso prefira pagamento em dinheiro faça seu pedido direto no ponto de venda localizado no *insira local de venda*.</p>
     </div>
 
     <div class="form__container">
-      <form action="" class="d-flex flex-column justify-content-between align-items-center">
-        <div class="d-flex flex-column align-items-center w-100">
-          
-          <div class="d-flex justify-content-around">
+      <form method="POST" class="d-flex flex-column justify-content-between align-items-center">
+        <div class="d-flex flex-column align-items-start w-100">
+
+          <div class="personal__data d-flex flex-wrap justify-content-between">
             <input type="text" id="name-sender" class="name" placeholder="Seu nome">
-            <input type="text" id="class-sender" class="classroom" placeholder="Sala">
+
+            <select name="" id="year-sender" class="year">
+              <option value="" selected hidden>Ano</option>
+              <option value="1">1º</option>
+              <option value="2">2º</option>
+              <option value="3">3º</option>
+            </select>
+            <select name="" id="class-sender" class="classroom">
+              <option value="" selected hidden>Sala</option>
+              <option value="4">ADM - Sede</option>
+              <option value="1">DS - Sede</option>
+              <option value="3">Mecânica - Sede</option>
+              <option value="6">Mecatrônica - Sede</option>
+              <option value="5">Meio Ambiente - Sede</option>
+              <option value="7">Nutrição e Dietética</option>
+              <option value="2">Química - Sede</option>
+              <option value="8">DS - FATEC</option>
+              <option value="9">ADM - FATEC</option>
+              <option value="10">Infonet - Iperó</option>
+            </select>
+
+            <input type="text"  id="phone-sender" class="phone" placeholder="Seu telefone">
           </div>
 
-          <div class="d-flex flex-column align-items-center">
-            <div class="d-flex justify-content-around">
-              <input type="text" id="name-recipient" class="name" placeholder="Destinatário">
-              <input type="text" id="class-recipient" class="classroom" placeholder="Sala">
-            </div>
+          <div class="personal__data d-flex flex-wrap justify-content-between">
+            <input type="text" id="name-recipient" class="name" placeholder="Destinatário">
+
+
+            <select name="" id="year-sender" class="year">
+              <option value="" selected hidden>Ano</option>
+              <option value="1">1º</option>
+              <option value="2">2º</option>
+              <option value="3">3º</option>
+            </select>
+            <select name="" id="class-sender" class="classroom">
+              <option value="" selected hidden>Sala</option>
+              <option value="4">ADM - Sede</option>
+              <option value="1">DS - Sede</option>
+              <option value="3">Mecânica - Sede</option>
+              <option value="6">Mecatrônica - Sede</option>
+              <option value="5">Meio Ambiente - Sede</option>
+              <option value="7">Nutrição e Dietética</option>
+              <option value="2">Química - Sede</option>
+              <option value="8">DS - FATEC</option>
+              <option value="9">ADM - FATEC</option>
+              <option value="10">Infonet - Iperó</option>
+            </select>
+
+            <input type="text" id="phone-recipient" class="phone" placeholder="Telefone do destinatário">
             <textarea name="caracteristicas" id="" class="message__field" placeholder="Descreva características do destinatário para identificarmos..."></textarea>
           </div>
 
-          <div class="message">
-            <div class="message__btn d-flex flex-column justify-content-center align-items-center">
-              <button type="button" class="message__btn-add w-100">Escrever Mensagem</button>
-              <button type="button" class="message__btn-remove">
-                Excluir Mensagem
-                <img src="./assets/img/minus-outline.svg" alt="">
-              </button>
-            </div>
+          <div class="message d-flex flex-column align-items-start">
             <textarea name="mensagem" id="" class="message__field" placeholder="Escreva sua mensagem..."></textarea>
-          </div>
 
-          <div class="w-100">
-            <input type="checkbox" name="" id="option-anonymous">
-            <label for="option-anonymous">Quer ser anônimo?</label>
-          </div>
-
-          <div class="combos w-100">
-            <button>Adicionar Doce</button>
-            <div class="d-flex">
-              <select name="" id="">
-                <option value="">Doces</option>
-              </select>
-              <p>R$00,00</p>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Quer ser anônimo?
+              </label>
             </div>
           </div>
+
+          <div class="combos d-flex flex-column align-items-center w-100">
+            <button type="button" class="candy__btn-add form__btn">Adicionar doce</button>
+            <div class="combos__candies d-flex flex-wrap justify-content-between w-100"></div>
+          </div>
+
+          <div class="form-check checkbox__input">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Gostaria que alguém recitasse sua mensagem?
+            </label>
+          </div>
+
+        </div>
 
           <button class="form__btn">Pagar</button>
         </div>
@@ -74,6 +115,5 @@
     </div>
   </main>
   <script src="./assets/js/main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 </body>
 </html>
