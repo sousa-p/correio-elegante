@@ -63,6 +63,8 @@ $app->singleton(
 
 $app->configure('app');
 
+$app->configure('cors');
+
 $app->configure('jwt');
 
 $app->configure('auth');

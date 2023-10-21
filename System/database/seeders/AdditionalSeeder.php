@@ -41,7 +41,7 @@ class AdditionalSeeder extends Seeder
             ],
             [
                 'name' => 'Eu Shippo',
-                'value' => 2.5
+                'value' => 1.25
             ]
         ];
 
