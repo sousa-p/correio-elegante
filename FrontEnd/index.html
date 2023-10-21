@@ -38,24 +38,30 @@
             </select>
             <select name="" id="class-sender" class="classroom">
               <option value="" selected hidden>Sala</option>
-              <option value="4">ADM - Sede</option>
-              <option value="1">DS - Sede</option>
-              <option value="3">Mecânica - Sede</option>
-              <option value="6">Mecatrônica - Sede</option>
-              <option value="5">Meio Ambiente - Sede</option>
-              <option value="7">Nutrição e Dietética</option>
-              <option value="2">Química - Sede</option>
-              <option value="8">DS - FATEC</option>
-              <option value="9">ADM - FATEC</option>
-              <option value="10">Infonet - Iperó</option>
+              <option value="ADM_Sede">ADM - Sede</option>
+              <option value="DS_Sede">DS - Sede</option>
+              <option value="Mecanica">Mecânica - Sede</option>
+              <option value="Mecatronica">Mecatrônica - Sede</option>
+              <option value="MeioAmbiente">Meio Ambiente - Sede</option>
+              <option value="Nutricao">Nutrição e Dietética</option>
+              <option value="Quimica">Química - Sede</option>
+              <option value="DS_FATEC">DS - FATEC</option>
+              <option value="AMD_FATEC">ADM - FATEC</option>
+              <option value="Infonet_Ipero">Infonet - Iperó</option>
             </select>
 
             <input type="text"  id="phone-sender" class="phone" placeholder="Seu telefone">
           </div>
 
           <div class="personal__data d-flex flex-wrap justify-content-between">
-            <input type="text" id="name-recipient" class="name" placeholder="Destinatário">
+            <div class="form-check">
+              <input class="form-check-input letter__couple" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Adicionar cartinha "Eu Shippo"?
+              </label>
+            </div>
 
+            <input type="text" id="name-recipient" class="name" placeholder="Destinatário">
 
             <select name="" id="year-sender" class="year">
               <option value="" selected hidden>Ano</option>
@@ -65,16 +71,16 @@
             </select>
             <select name="" id="class-sender" class="classroom">
               <option value="" selected hidden>Sala</option>
-              <option value="4">ADM - Sede</option>
-              <option value="1">DS - Sede</option>
-              <option value="3">Mecânica - Sede</option>
-              <option value="6">Mecatrônica - Sede</option>
-              <option value="5">Meio Ambiente - Sede</option>
-              <option value="7">Nutrição e Dietética</option>
-              <option value="2">Química - Sede</option>
-              <option value="8">DS - FATEC</option>
-              <option value="9">ADM - FATEC</option>
-              <option value="10">Infonet - Iperó</option>
+              <option value="ADM_Sede">ADM - Sede</option>
+              <option value="DS_Sede">DS - Sede</option>
+              <option value="Mecanica">Mecânica - Sede</option>
+              <option value="Mecatronica">Mecatrônica - Sede</option>
+              <option value="MeioAmbiente">Meio Ambiente - Sede</option>
+              <option value="Nutricao">Nutrição e Dietética</option>
+              <option value="Quimica">Química - Sede</option>
+              <option value="DS_FATEC">DS - FATEC</option>
+              <option value="AMD_FATEC">ADM - FATEC</option>
+              <option value="Infonet_Ipero">Infonet - Iperó</option>
             </select>
 
             <input type="text" id="phone-recipient" class="phone" placeholder="Telefone do destinatário">
@@ -93,8 +99,8 @@
           </div>
 
           <div class="combos d-flex flex-column align-items-center w-100">
-            <button type="button" class="candy__btn-add form__btn">Adicionar doce</button>
-            <div class="combos__candies d-flex flex-wrap justify-content-between w-100"></div>
+            <button type="button" class="additional__btn-add form__btn">Adicionais</button>
+            <div class="combos__additional d-flex flex-wrap justify-content-between w-100"></div>
           </div>
 
           <div class="form-check checkbox__input">
