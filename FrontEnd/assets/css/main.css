@@ -62,7 +62,7 @@ select, textarea{
   cursor: pointer;
 }
 
-.form__btn:focus{
+.form__btn:active{
   outline: none;
   transform: translateY(2px);
   box-shadow: 0 4px 0 var(--primary-color);
