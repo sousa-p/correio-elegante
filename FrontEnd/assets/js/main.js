@@ -1,25 +1,37 @@
-const divCandies = document.querySelector(".combos__candies");
-const addCandy = document.querySelector(".candy__btn-add");
-const candyFieldInner = `
-<select name="" id="" class="candy__option">
-  <option value="">R$00,00 Doces</option>
-  <option value="">R$00,00 Fini</option>
-  <option value="">R$00,00 Bala</option>
-</select>
-<button type="button" class="candy__btn-remove">
-  Remover
-  <img src="./assets/img/minus-outline.svg" alt="">
-</button>
-`;
+const letterCouple = document.querySelector(".letter__couple");
 
-addCandy.addEventListener("click", () => {
-  var candyField = document.createElement('div');
-  candyField.classList.add("candy__field");
-  candyField.innerHTML = candyFieldInner;
-  divCandies.appendChild(candyField);
+const divAdditional = document.querySelector(".combos__additional");
+const addAdditional = document.querySelector(".additional__btn-add");
 
-  const removeCandy = document.querySelectorAll(".candy__btn-remove");
-  removeCandy.forEach(element => {
+addAdditional.addEventListener("click", () => {
+  const url = 'http://127.0.0.1:8000/additional/';
+
+  fetch(url)
+  .then(response => response.json())
+  .then(dados => { 
+    console.log(dados)
+  })
+  .catch((_) => console.log(_))
+
+  const AdditionalFieldInner = `
+  <select name="" id="" class="additional__option">
+    <option value="">R$00,00 Doces</option>
+    <option value="">R$00,00 Fini</option>
+    <option value="">R$00,00 Bala</option>
+  </select>
+  <button type="button" class="additional__btn-remove">
+    Remover
+    <img src="./assets/img/minus-outline.svg" alt="">
+  </button>
+  `;
+
+  var AdditionalField = document.createElement('div');
+  AdditionalField.classList.add("additional__field");
+  AdditionalField.innerHTML = AdditionalFieldInner;
+  divAdditional.appendChild(AdditionalField);
+
+  const removeAdditional = document.querySelectorAll(".additional__btn-remove");
+  removeAdditional.forEach(element => {
     element.addEventListener("click", () => {
       element.parentElement.remove();
     });

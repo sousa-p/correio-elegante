@@ -15,7 +15,7 @@
 
 /* FORMS */
 .personal__data {
-  margin: 0 10px;
+  margin: 10px;
   border-bottom: 2px solid var(--secondary-color);
 }
 
@@ -54,13 +54,13 @@ textarea {
   padding: 0 10px;
 }
 
-.candy__field {
+.additional__field {
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.candy__btn-add {
+.additional__btn-add {
   border: 0;
   border-radius: 8px;
   margin: 20px 0;
@@ -68,7 +68,7 @@ textarea {
   height: 60px;
 }
 
-.candy__btn-remove {
+.additional__btn-remove {
   margin: 10px 0;
   border: 0;
   font-weight: 600;
@@ -76,11 +76,11 @@ textarea {
   color: var(--secondary-color);
 }
 
-.candy__btn-remove img {
+.additional__btn-remove img {
   height: 30px;
 }
 
-.candy__option {
+.additional__option {
   width: 65%;
 }
 
