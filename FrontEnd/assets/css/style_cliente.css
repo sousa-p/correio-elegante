@@ -1,22 +1,32 @@
 .title {
-  margin: 0;
+  margin: 10px 0;
   width: 320px;
   text-align: center;
   font-size: 28px;
 }
 
 .disclaimer {
-  margin: 30px 0;
+  margin: 10px 0;
   width: 90%;
   border-radius: 8px;
   padding: 10px;
   background: var(--quaternary-color);
 }
 
+.disclaimer__couple{
+  width: 100%;
+  font-size: 14px;
+}
+
 /* FORMS */
 .personal__data {
-  margin: 10px;
-  border-bottom: 2px solid var(--secondary-color);
+  padding: 10px;
+}
+
+.personal__data-recipient{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 input[type="text"],
@@ -86,4 +96,22 @@ textarea {
 
 .checkbox__input {
   margin: 15px 10px;
+}
+
+/* PAY */
+.purchase__amount{
+  padding: 0 30px;
+}
+
+.purchase__amount h3{
+  color: var(--secondary-color);
+}
+
+.amount{
+  padding: 5px 0;
+}
+
+.amount__title{
+  font-weight: 600;
+  color: var(--primary-color);
 }

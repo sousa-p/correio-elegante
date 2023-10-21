@@ -19,14 +19,17 @@
   <main>
     <h1 class="title">Mande uma mensagem para alguém! ❤</h1>
     <div class="disclaimer">
-      <p>Cada bilhete custa R$00,00 com adicional caso queria adicionar um docinho! 😋</p>
-      <p>Aceitamos apenas pedidos por pix, caso prefira pagamento em dinheiro faça seu pedido direto no ponto de venda localizado no *insira local de venda*.</p>
+      <p>Cada bilhete custa R$1,50 mais o valor dos adicionais que você escolher! 😋</p>
+      <p>Pelo site aceitamos apenas pedidos via pix, caso prefira pagamento em dinheiro faça seu pedido direto no ponto de venda localizado no *insira local de venda*.</p>
+    </div>
+    <div class="disclaimer">
+      <p>Os telefones pedidos serão apenas e estritamente utilizados para contato caso não seja possível a entrega das cartas.</p>
+      <p>Caso você ou seu(s) destinatário(s) não seja aluno ETEC/FATEC ou não tenha seu curso, deixe o campo "Ano" e "Sala" em branco.</p>
     </div>
 
     <div class="form__container">
       <form method="POST" class="d-flex flex-column justify-content-between align-items-center">
         <div class="d-flex flex-column align-items-start w-100">
-
           <div class="personal__data d-flex flex-wrap justify-content-between">
             <input type="text" id="name-sender" class="name" placeholder="Seu nome">
 
@@ -51,72 +54,79 @@
             </select>
 
             <input type="text"  id="phone-sender" class="phone" placeholder="Seu telefone">
-          </div>
-
-          <div class="personal__data d-flex flex-wrap justify-content-between">
-            <div class="form-check">
-              <input class="form-check-input letter__couple" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                Adicionar cartinha "Eu Shippo"?
-              </label>
-            </div>
-
-            <input type="text" id="name-recipient" class="name" placeholder="Destinatário">
-
-            <select name="" id="year-sender" class="year">
-              <option value="" selected hidden>Ano</option>
-              <option value="1">1º</option>
-              <option value="2">2º</option>
-              <option value="3">3º</option>
-            </select>
-            <select name="" id="class-sender" class="classroom">
-              <option value="" selected hidden>Sala</option>
-              <option value="ADM_Sede">ADM - Sede</option>
-              <option value="DS_Sede">DS - Sede</option>
-              <option value="Mecanica">Mecânica - Sede</option>
-              <option value="Mecatronica">Mecatrônica - Sede</option>
-              <option value="MeioAmbiente">Meio Ambiente - Sede</option>
-              <option value="Nutricao">Nutrição e Dietética</option>
-              <option value="Quimica">Química - Sede</option>
-              <option value="DS_FATEC">DS - FATEC</option>
-              <option value="AMD_FATEC">ADM - FATEC</option>
-              <option value="Infonet_Ipero">Infonet - Iperó</option>
-            </select>
-
-            <input type="text" id="phone-recipient" class="phone" placeholder="Telefone do destinatário">
-            <textarea name="caracteristicas" id="" class="message__field" placeholder="Descreva características do destinatário para identificarmos..."></textarea>
-          </div>
-
-          <div class="message d-flex flex-column align-items-start">
-            <textarea name="mensagem" id="" class="message__field" placeholder="Escreva sua mensagem..."></textarea>
 
             <div class="form-check">
               <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
               <label class="form-check-label" for="flexCheckDefault">
-                Quer ser anônimo?
+                Enviar carta anônima?
               </label>
             </div>
           </div>
 
+          <div class="personal__data d-flex flex-wrap justify-content-between">
+            <div class="personal__data-recipient">
+              <input type="text" id="name-recipient" class="name" placeholder="Destinatário">
+
+              <select name="" id="year-sender" class="year">
+                <option value="" selected hidden>Ano</option>
+                <option value="1">1º</option>
+                <option value="2">2º</option>
+                <option value="3">3º</option>
+              </select>
+              <select name="" id="class-sender" class="classroom">
+                <option value="" selected hidden>Sala</option>
+                <option value="ADM_Sede">ADM - Sede</option>
+                <option value="DS_Sede">DS - Sede</option>
+                <option value="Mecanica">Mecânica - Sede</option>
+                <option value="Mecatronica">Mecatrônica - Sede</option>
+                <option value="MeioAmbiente">Meio Ambiente - Sede</option>
+                <option value="Nutricao">Nutrição e Dietética</option>
+                <option value="Quimica">Química - Sede</option>
+                <option value="DS_FATEC">DS - FATEC</option>
+                <option value="AMD_FATEC">ADM - FATEC</option>
+                <option value="Infonet_Ipero">Infonet - Iperó</option>
+              </select>
+
+              <input type="text" id="phone-recipient" class="phone" placeholder="Telefone do destinatário">
+              <textarea name="caracteristicas" id="" class="message__field" placeholder="Descreva características do destinatário para identificarmos..."></textarea>
+
+              <textarea name="mensagem" id="" class="message__field" placeholder="Escreva sua mensagem..."></textarea>
+            </div>
+
+            <div class="form-check">
+              <input class="form-check-input letter__couple" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Escrever cartinha "Eu Shippo"?
+              </label>
+              <div class="disclaimer disclaimer__couple">
+                <p>Mande cartinhas para duas pessoas que você shippa.</p>
+                <p>Essa opção não permite ter adicionais.*</p>
+              </div>
+            </div>
+          </div>
+
           <div class="combos d-flex flex-column align-items-center w-100">
-            <button type="button" class="additional__btn-add form__btn">Adicionais</button>
+            <button type="button" class="additional__btn-add form__btn">Comprar Adicionais</button>
             <div class="combos__additional d-flex flex-wrap justify-content-between w-100"></div>
           </div>
-
-          <div class="form-check checkbox__input">
-            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-            <label class="form-check-label" for="flexCheckDefault">
-              Gostaria que alguém recitasse sua mensagem?
-            </label>
+        </div>
+        <div class="purchase__amount w-100">
+          <h3>Subtotal:</h3>
+          <div class="amount d-flex flex-column align-items-end">
+            <p class="type__letter">
+              <span class="amount__title">Carta:</span>
+              R$00,00
+            </p>
+            <p class="type__letter">
+              <span class="amount__title">Carta:</span>
+              R$00,00
+            </p>
+            <h4>
+              <span class="amount__title">Total:</span>
+            </h4>
           </div>
-
         </div>
-
-          <button class="form__btn">Pagar</button>
-        </div>
-
-
-
+        <button class="form__btn">Pagar</button>
       </form>
     </div>
   </main>
