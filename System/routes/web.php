@@ -31,7 +31,9 @@ $router->group(['prefix'=> '/admin'], function () use ($router) {
 */
 
 $router->group(['prefix'=> '/letter'], function () use ($router) {
-    $router->get('/','LetterController@index');
+    $router->group(['middleware' => 'auth'], function () use ($router) {
+        $router->get('/','LetterController@index');
+    });
     $router->post('/store','LetterController@store');
     $router->post('/store/couple','LetterController@storeCouple');
 });
