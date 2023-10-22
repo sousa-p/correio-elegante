@@ -5,42 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="./assets/css/main.css">
-  <link rel="stylesheet" href="./assets/css/style_cliente.css">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="./style_index.css">
   <title>Código Cupido</title>
 </head>
 <body class="d-flex flex-column align-items-center">
   <header>
     <div class="logo">
-      <img src="./assets/img/download.jfif" alt="logo">
+      <div class="d-flex align-items-center justify-content-center">
+        <img src="../../assets/img/ds logo cor7png.png" alt="logo">
+      </div>
+      <h5 class="title__logo">CÓDIGO ❤ CUPIDO</h5>
     </div>
   </header>
 
   <main>
-    <h1 class="title">Mande uma mensagem para alguém! ❤</h1>
+    <h1 class="title">Mande uma mensagem para alguém! <span class="title__logo">❤</span></h1>
     <div class="disclaimer">
       <p>Cada bilhete custa R$1,50 mais o valor dos adicionais que você escolher! 😋</p>
+      <p>Caso você ou seu(s) destinatário(s) não seja aluno ETEC/FATEC ou não tenha seu curso, deixe o campo <b>"Ano"</b> e <b>"Sala"</b> em branco.</p>
       <p>Pelo site aceitamos apenas pedidos via pix, caso prefira pagamento em dinheiro faça seu pedido direto no ponto de venda localizado no *insira local de venda*.</p>
-    </div>
-    <div class="disclaimer">
-      <p>Os telefones pedidos serão apenas e estritamente utilizados para contato caso não seja possível a entrega das cartas.</p>
-      <p>Caso você ou seu(s) destinatário(s) não seja aluno ETEC/FATEC ou não tenha seu curso, deixe o campo "Ano" e "Sala" em branco.</p>
     </div>
 
     <div class="form__container">
       <form method="POST" class="d-flex flex-column justify-content-between align-items-center">
         <div class="d-flex flex-column align-items-start w-100">
           <div class="personal__data d-flex flex-wrap justify-content-between">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="checkbox-anonymous">
+              <label class="form-check-label" for="checkbox-anonymous">
+                Enviar carta anônima?
+              </label>
+            </div>
+
             <input type="text" id="name-sender" class="name" placeholder="Seu nome">
 
             <select name="" id="year-sender" class="year">
-              <option value="" selected hidden>Ano</option>
+              <option value="default" selected hidden>Ano</option>
               <option value="1">1º</option>
               <option value="2">2º</option>
               <option value="3">3º</option>
             </select>
             <select name="" id="class-sender" class="classroom">
-              <option value="" selected hidden>Sala</option>
+              <option value="default" selected hidden>Sala</option>
               <option value="ADM_Sede">ADM - Sede</option>
               <option value="DS_Sede">DS - Sede</option>
               <option value="Mecanica">Mecânica - Sede</option>
@@ -54,12 +61,8 @@
             </select>
 
             <input type="text"  id="phone-sender" class="phone" placeholder="Seu telefone">
-
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
-                Enviar carta anônima?
-              </label>
+            <div class="disclaimer disclaimer__couple">
+              <p>Seu telefone será utilizado apenas para contato caso não seja possível a entrega das cartas ou pagamento não for efetuado.</p>
             </div>
           </div>
 
@@ -87,15 +90,14 @@
                 <option value="Infonet_Ipero">Infonet - Iperó</option>
               </select>
 
-              <input type="text" id="phone-recipient" class="phone" placeholder="Telefone do destinatário">
               <textarea name="caracteristicas" id="" class="message__field" placeholder="Descreva características do destinatário para identificarmos..."></textarea>
 
               <textarea name="mensagem" id="" class="message__field" placeholder="Escreva sua mensagem..."></textarea>
             </div>
 
             <div class="form-check">
-              <input class="form-check-input letter__couple" type="checkbox" value="" id="flexCheckDefault">
-              <label class="form-check-label" for="flexCheckDefault">
+              <input class="form-check-input" type="checkbox" value="" id="checkbox-couple">
+              <label class="form-check-label" for="checkbox-couple">
                 Escrever cartinha "Eu Shippo"?
               </label>
               <div class="disclaimer disclaimer__couple">
@@ -108,32 +110,16 @@
             <div class="combos__btn">
               <button type="button" class="additional__btn-add form__btn">Comprar Adicionais</button>
               <div class="disclaimer disclaimer__combos">
-                <p>A opção "Eu Shippo" não permite ter adicionais.*</p>
+                <p>A opção "Eu Shippo" não permite compras adicionais.*</p>
               </div>
             </div>
             <div class="combos__additional d-flex flex-wrap justify-content-between w-100"></div>
-          </div>
-        </div>
-        <div class="purchase__amount w-100">
-          <h3>Subtotal:</h3>
-          <div class="amount d-flex flex-column">
-            <div class="amount__prices">
-              <p class="type__letter">
-                <span class="amount__title">Carta </span>R$00,00
-              </p>
-              <p class="type__letter">
-                <span class="amount__title">Batom e Fini </span>R$00,00
-              </p>
-            </div>
-            <h4>
-              <span class="amount__title">Total: </span>R$00,00
-            </h4>
           </div>
         </div>
         <button class="form__btn">Pagar</button>
       </form>
     </div>
   </main>
-  <script src="./assets/js/main.js"></script>
+  <script src="./script_index.js"></script>
 </body>
 </html>
