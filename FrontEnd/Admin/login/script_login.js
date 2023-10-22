@@ -17,9 +17,10 @@ btnLogin.addEventListener("click", () => {
     body: JSON.stringify(data),
   })
   .then(response => {
-    (response.status === 200)
-    ? window.location.href = "../listagemCartas/listagemCartas.html"
-    : response.json();
+    if(response.status === 200){
+      window.location.href = "../listagemCartas/listagemCartas.html"
+    }
+    return response.json();
   })
   .then(dados => {
     localStorage.setItem("token", dados.token);
