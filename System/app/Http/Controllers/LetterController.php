@@ -112,4 +112,17 @@ class LetterController extends Controller
 
         return response()->json($letters, 201);
     }
+
+    public function update (Request $request) {
+        $this->validate($request, [
+            'id' => ['required', 'exists:Letters,id'],
+            'status' => ['required', 'string', Rule::in(['Aguardando Pagamento', 'Pendente de Envio', 'Enviado'])]
+        ]);
+
+        $letter = Letter::find( $request->input('id'));
+        $letter->status = $request->input('status');
+        $letter->save();
+
+        return response()->json($letter, 200);
+    }
 }

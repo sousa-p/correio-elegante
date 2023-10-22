@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('Letters', function (Blueprint $table) {
             $table->id('id');
+            $table->enum('status', ['Aguardando Pagamento', 'Pendente de Envio', 'Enviado'])->default('Aguardando Pagamento');
             $table->string('message')->max('255');
-            $table->boolean('sent')->default(false);
             $table->unsignedBigInteger('receiver_id');
             $table->unsignedBigInteger('sender_id');
             $table->index('Senders');

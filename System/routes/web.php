@@ -33,6 +33,7 @@ $router->group(['prefix'=> '/admin'], function () use ($router) {
 $router->group(['prefix'=> '/letter'], function () use ($router) {
     $router->group(['middleware' => 'auth'], function () use ($router) {
         $router->get('/','LetterController@index');
+        $router->patch('/update','LetterController@update');
     });
     $router->post('/store','LetterController@store');
     $router->post('/store/couple','LetterController@storeCouple');
