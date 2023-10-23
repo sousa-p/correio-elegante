@@ -38,7 +38,9 @@
               </label>
             </div>
 
-            <input type="text" class="name-sender name" placeholder="Seu nome">
+            <div class="container__name-sender w-100">
+              <input type="text" class="name-sender name" placeholder="Seu nome">
+            </div>
 
             <select name="" class="year-sender year">
               <option value="default" selected>Ano</option>
@@ -60,7 +62,9 @@
               <option value="Infonet_Ipero">Infonet - Iperó</option>
             </select>
 
-            <input type="text" class="phone-sender phone" placeholder="Seu telefone">
+            <div class="container__phone-sender w-100">
+              <input type="text" class="phone-sender phone" placeholder="Seu telefone">
+            </div>
             <div class="disclaimer disclaimer__couple">
               <p>Seu telefone será utilizado apenas para contato caso não seja possível a entrega das cartas ou pagamento não for efetuado.</p>
             </div>
@@ -68,7 +72,9 @@
 
           <div class="personal__data d-flex flex-wrap justify-content-between">
             <div class="personal__data-recipient">
-              <input type="text" class="name-recipient name" placeholder="Destinatário">
+              <div class="container__name-recipient w-100">
+                <input type="text" class="name-recipient name" placeholder="Destinatário">
+              </div>
 
               <select name="" class="year-recipient year">
                 <option value="" selected hidden>Ano</option>
@@ -90,9 +96,13 @@
                 <option value="Infonet_Ipero">Infonet - Iperó</option>
               </select>
 
-              <textarea name="caracteristicas" class="characteristics__input message__field" placeholder="Descreva características do destinatário para identificarmos..."></textarea>
+              <div class="container__characteristics w-100">
+                <textarea name="caracteristicas" class="characteristics__input message__field" placeholder="Descreva características do destinatário para identificarmos..."></textarea>
+              </div>
 
-              <textarea name="mensagem" class="message__input message__field" placeholder="Escreva sua mensagem..."></textarea>
+              <div class="container__message w-100">
+                <textarea name="mensagem" class="message__input message__field" placeholder="Escreva sua mensagem..."></textarea>
+              </div>
             </div>
 
             <div class="form-check">

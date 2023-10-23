@@ -1,3 +1,23 @@
+function inputEmpty(input){
+  return String(input.value).trim() === '';
+}
+
+function messageError(input, message){
+  let error = document.createElement('p');
+  error.classList.add("error");
+  error.innerHTML = `${message}`
+  input.parentElement.appendChild(error);
+}
+
+function removeMessageError(input) {
+  input.addEventListener("keydown", () => {
+    if(!inputEmpty(input)) {
+      let error = document.querySelectorAll(".error");
+      input.parentElement.removeChild(error);
+    }
+  });
+}
+
 const letterCouple = document.querySelector("#checkbox-couple");
 const letterAnonymous = document.querySelector("#checkbox-anonymous");
 
@@ -100,10 +120,10 @@ btnCad.addEventListener("click", () => {
   const receivers_courses = document.querySelectorAll('.class-recipient');
   const receivers_names = document.querySelectorAll('.name-recipient');
   const receivers_years = document.querySelectorAll('.year-recipient');
-  const sender_tel = document.querySelector('.phone-sender').value;
+  const sender_tel = document.querySelector('.phone-sender');
   const sender_year = document.querySelector('.year-sender').value;
   const sender_course = document.querySelector('.class-sender').value;
-  const sender_name = document.querySelector('.name-sender').value;
+  const sender_name = document.querySelector('.name-sender');
 
   if(letterCouple.checked) {
   const data = {
@@ -113,10 +133,10 @@ btnCad.addEventListener("click", () => {
     receivers_courses: [receivers_courses[0].value, receivers_courses[1].value],
     receivers_names: [receivers_names[0].value, receivers_names[1].value],
     receivers_years: [receivers_years[0].value, receivers_years[1].value],
-    sender_tel: sender_tel,
+    sender_tel: sender_tel.value,
     sender_year: sender_year,
     sender_course: sender_year,
-    sender_name: sender_name
+    sender_name: sender_name.value
   }
 
   fetch('http://127.0.0.1:8000/letter/store/couple', {
@@ -134,6 +154,27 @@ btnCad.addEventListener("click", () => {
     })
     .then(dados => {
       console.log(dados)
+      
+      if(inputEmpty(receivers_names[1])){
+        dados.receiver_names = "O campo 'nome destinatário' é obrigatório."
+        messageError(receivers_names[1], dados.receiver_names);
+        
+        removeMessageError(receivers_names[1]);
+      }
+
+      if(inputEmpty(receivers_characteristics[1])){
+        dados.receivers_characteristics = "O campo 'caracteríticas' é obrigatório."
+        messageError(receivers_characteristics[1], dados.receivers_characteristics);
+        
+        removeMessageError(receivers_characteristics[1]);
+      }
+
+      if(inputEmpty(messages[1])){
+        dados.message = "O campo 'mensagem' é obrigatório."
+        messageError(messages[1], dados.message);
+        
+        removeMessageError(messages[1]);
+      }
     })
     .catch((_) => console.log(_));
 
@@ -152,10 +193,10 @@ btnCad.addEventListener("click", () => {
       receiver_course: receivers_courses[0].value,
       receiver_name: receivers_names[0].value,
       receiver_year: receivers_years[0].value,
-      sender_tel: sender_tel,
+      sender_tel: sender_tel.value,
       sender_year: sender_year,
       sender_course: sender_course,
-      sender_name: sender_name
+      sender_name: sender_name.value
     }
 
     fetch('http://127.0.0.1:8000/letter/store', {
@@ -173,7 +214,43 @@ btnCad.addEventListener("click", () => {
     })
     .then(dados => {
       console.log(dados)
+      if(inputEmpty(sender_name) && !letterAnonymous.checked){
+        let errorSender_name = "O campo 'nome' é obrigatório."
+        messageError(sender_name, errorSender_name);
+        
+        removeMessageError(sender_name);
+      }
+
+      if(inputEmpty(sender_tel)){
+        dados.sender_tel = "O campo 'telefone' é obrigatório."
+        messageError(sender_tel, dados.sender_tel);
+        
+        removeMessageError(sender_tel);
+      }
+
+      if(inputEmpty(receivers_names[0])){
+        dados.receiver_names = "O campo 'nome destinatário' é obrigatório."
+        messageError(receivers_names[0], dados.receiver_names);
+        
+        removeMessageError(receivers_names[0]);
+      }
+
+      if(inputEmpty(receivers_characteristics[0])){
+        dados.receivers_characteristics = "O campo 'caracteríticas' é obrigatório."
+        messageError(receivers_characteristics[0], dados.receivers_characteristics);
+        
+        removeMessageError(receivers_characteristics[0]);
+      }
+
+
+      if(inputEmpty(messages[0])){
+        dados.message = "O campo 'mensagem' é obrigatório."
+        messageError(messages[0], dados.message);
+        
+        removeMessageError(messages[0]);
+      }
     })
     .catch((_) => console.log(_));
   }
 })  
+
