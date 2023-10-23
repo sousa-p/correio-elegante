@@ -15,7 +15,7 @@ class Letter extends Model
      */
     protected $fillable = [
         'message',
-        'sent',
+        'anonymous',
         'sender_id',
         'receiver_id'
     ];

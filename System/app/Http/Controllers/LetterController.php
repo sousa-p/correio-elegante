@@ -25,6 +25,7 @@ class LetterController extends Controller
             'sender_name' => ['string', 'max:255'],
             'sender_course' => ['nullable', 'string', 'max:255'],
             'sender_year' => ['nullable', 'string', Rule::in(['1', '2', '3'])],
+            'anonymous' => ['required', 'boolean'],
             'sender_tel' => ['required', 'string', 'size:15'],
             'receiver_name' => ['required', 'string', 'max:255'],
             'receiver_course' => ['nullable', 'string', 'max:255'],
@@ -50,6 +51,7 @@ class LetterController extends Controller
 
         $letter = Letter::create([
             'message' => ucfirst($request->input('message')),
+            'anonymous' => $request->input('anonymous'),
             'sender_id' => $sender->id,
             'receiver_id' => $receiver->id
         ]);
@@ -66,6 +68,7 @@ class LetterController extends Controller
         $this->validate($request, [
             'messages' => ['required', 'array', 'size:2'],
             'messages.*' => ['required', 'string', 'max:255', 'min:1'],
+            'anonymous' => ['required', 'boolean'],
             'sender_name' => ['string', 'max:255'],
             'sender_course' => ['string', 'max:255'],
             'sender_year' => ['nullable', 'string', Rule::in(['1', '2', '3'])],
@@ -101,6 +104,7 @@ class LetterController extends Controller
 
             $letter = Letter::create([
                 'message' => ucfirst($request->input('messages')[$i]),
+                'anonymous' => ['required', 'boolean'],
                 'sender_id' => $sender->id,
                 'receiver_id' => $receiver->id
             ]);

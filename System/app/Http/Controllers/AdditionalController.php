@@ -11,8 +11,4 @@ class AdditionalController extends Controller
         $additionals = Additional::all();
         return response()->json($additionals);
     }
-
-    public function store(Request $request) {
-        
-    }
 }

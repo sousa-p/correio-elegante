@@ -25,8 +25,9 @@ class LettersSeeder extends Seeder
 
             $letter = Letter::create([
                 'message' => $faker->text(),
+                'anonymous' => $faker->boolean(),
                 'receiver_id' => $faker->randomElement($receivers),
-                'sender_id' => $faker->randomElement($senders)
+                'sender_id' => $faker->randomElement($senders),
             ]);
 
             $letter->save();
