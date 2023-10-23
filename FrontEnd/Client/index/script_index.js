@@ -1,11 +1,11 @@
 var recipientData = document.querySelector(".personal__data-recipient").innerHTML;
 
+// Phone Mask
 const inputPhone = (event) => {
   let phone = document.querySelector(".phone");
   phone = event.target;
   phone.value = maskPhone(phone.value);
 }
-
 const maskPhone = (value) => {
   if (!value) return ""
   value = value.replace(/\D/g,'')
@@ -14,64 +14,33 @@ const maskPhone = (value) => {
   return value
 }
 
+// Validation
 function inputEmpty(input){
   return String(input.value).trim() === '';
 }
-
 function messageError(input, message){
   let error = document.createElement('p');
-  let nameClass = `error-${input.classList[0]}`
   error.classList.add('error');
-  error.classList.add(nameClass);
-
+  error.classList.add(`error-${input.classList[0]}`);
   error.innerHTML = `${message}`
   input.parentElement.appendChild(error);
 }
-
 function removeMessageError(inputErro, i) {
   inputErro.addEventListener("keyup", () => {
-    if(!inputEmpty(inputErro)) {
-      let nameClass = `.error-${inputErro.classList[0]}`;
-      let error = document.querySelectorAll(nameClass)[i];
-      if(error) {
-        inputErro.parentElement.removeChild(error)
-      }
+    let error = document.querySelectorAll(`.error-${inputErro.classList[0]}`)[i];
+    if(!inputEmpty(inputErro) && error) {
+      inputErro.parentElement.removeChild(error);
     }
   });
 }
-
 function putMessageError(input, errorInput, j) {
-  if(inputEmpty(input)){
-    let nameClass = `.error-${input.classList[0]}`
-    if(!document.querySelectorAll(nameClass)[j]){
-      messageError(input, errorInput);
-    }
+  if(inputEmpty(input) && !document.querySelectorAll(`.error-${input.classList[0]}`)[j]){
+    messageError(input, errorInput);
     removeMessageError(input, j);
   }
 }
 
 const letterCouple = document.querySelector("#checkbox-couple");
-const letterAnonymous = document.querySelector("#checkbox-anonymous");
-
-letterAnonymous.addEventListener("change", () => {
-  let nameSender = document.querySelector(".name-sender");
-  let yearSender = document.querySelector(".year-sender");
-  let classSender = document.querySelector(".class-sender");
-  if (letterAnonymous.checked) {
-    nameSender.value = null;
-    yearSender.value = "default";
-    classSender.value = "default";
-
-    nameSender.disabled = true;
-    yearSender.disabled = true;
-    classSender.disabled = true;
-  } else {
-    nameSender.disabled = false;
-    yearSender.disabled = false;
-    classSender.disabled = false;
-  }
-});
-
 const addAdditional = document.querySelector(".additional__btn-add");
 letterCouple.addEventListener("change", () => {
   const disclaimerCombos = document.querySelector(".disclaimer__combos");
@@ -101,7 +70,7 @@ letterCouple.addEventListener("change", () => {
   }
 });
 
-const url = "https://jubilant-space-trout-57r9j445rr427vp7-8000.app.github.dev/additional";
+const url = "http://127.0.0.1:8000/additional";
 fetch(url)
   .then((response) => response.json())
   .then((dados) => {
@@ -144,6 +113,15 @@ fetch(url)
   })
   .catch((_) => console.log(_));
 
+
+  function setValueClass(select){
+    if(select.value == '') {
+      return null;
+    } else {
+      return select.value;
+    }
+  }
+
 const btnCad = document.getElementById("btn-form");
 btnCad.addEventListener("click", () => {
   const messages = document.querySelectorAll('.message__input');
@@ -155,22 +133,25 @@ btnCad.addEventListener("click", () => {
   const sender_year = document.querySelector('.year-sender').value;
   const sender_course = document.querySelector('.class-sender').value;
   const sender_name = document.querySelector('.name-sender');
+  const letterAnonymous = document.querySelector("#checkbox-anonymous");
+  var anonymousCheck = (letterAnonymous.checked) ? true : false;
 
   if(letterCouple.checked) {
   const data = {
     additional: ['7', '7'],
+    anonymous: anonymousCheck,
     messages: [messages[0].value, messages[1].value],
     receivers_characteristics: [receivers_characteristics[0].value, receivers_characteristics[1].value],
-    receivers_courses: [receivers_courses[0].value, receivers_courses[1].value],
+    receivers_courses: [setValueClass(receivers_courses[0]), setValueClass(receivers_courses[1])],
     receivers_names: [receivers_names[0].value, receivers_names[1].value],
-    receivers_years: [receivers_years[0].value, receivers_years[1].value],
+    receivers_years: [setValueClass(receivers_years[0]), setValueClass(receivers_years[1])],
     sender_tel: sender_tel.value,
-    sender_year: sender_year,
-    sender_course: sender_year,
+    sender_year: setValueClass(sender_year),
+    sender_course: setValueClass(sender_course),
     sender_name: sender_name.value
   }
 
-  fetch('https://jubilant-space-trout-57r9j445rr427vp7-8000.app.github.dev/letter/store/couple', {
+  fetch('http://127.0.0.1:8000/letter/store/couple', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -178,50 +159,38 @@ btnCad.addEventListener("click", () => {
       body: JSON.stringify(data),
     })
     .then(response => {
-      if(response.status === 200){
+      if(response.status === 200 || response.status === 201){
         window.location.href = "../pagamento/pagamento.html"
       }
       return response.json();
     })
     .then(dados => {
       console.log(dados)
-      if(inputEmpty(sender_name) && !letterAnonymous.checked){
-        let errorSender_name = "O campo 'nome' é obrigatório.";
-        let nameClass = `.error-${sender_name.classList[0]}`
 
-        if(!document.querySelector(nameClass)){
-          messageError(sender_name, errorSender_name);
-        }
-    
-        removeMessageError(sender_name, 0);
+      let errorSender_name = "O campo 'nome' é obrigatório.";
+      putMessageError(sender_name, errorSender_name, 0);
+      putMessageError(sender_tel, String(dados.sender_tel).replace("sender tel", "telefone"), 0);
+
+      let strDados = "Campo Obrigatório";
+      putMessageError(receivers_names[0], strDados, 0);
+      if(!putMessageError(receivers_names[0], strDados, 0)){
+        putMessageError(receivers_names[1], strDados, 0);
+      } else {
+        putMessageError(receivers_names[1], strDados, 1);
       }
 
-      console.log(messages);
-      let errorTel = "O campo 'telefone' é obrigatório.";
-      putMessageError(sender_tel, errorTel, 0);
-
-      let errorReceiverName = "O campo 'nome destinatário' é obrigatório.";
-      putMessageError(receivers_names[0], errorReceiverName, 0);
-      if(!putMessageError(receivers_names[0], errorReceiverName, 0)){
-        putMessageError(receivers_names[1], errorReceiverName, 0);
+      putMessageError(receivers_characteristics[0], strDados, 0);
+      if(!putMessageError(receivers_characteristics[0], strDados, 0)){
+        putMessageError(receivers_characteristics[1], strDados, 0);
       } else {
-        putMessageError(receivers_names[1], errorReceiverName, 1);
+        putMessageError(receivers_characteristics[1], strDados, 1);
       }
 
-      let errorCharacteristics = "O campo 'caracteríticas' é obrigatório.";
-      putMessageError(receivers_characteristics[0], errorCharacteristics, 0);
-      if(!putMessageError(receivers_characteristics[0], errorCharacteristics, 0)){
-        putMessageError(receivers_characteristics[1], errorCharacteristics, 0);
+      putMessageError(messages[0], strDados, 0);
+      if(!putMessageError(messages[0], strDados, 0)){
+        putMessageError(messages[1], strDados, 0);
       } else {
-        putMessageError(receivers_characteristics[1], errorCharacteristics, 1);
-      }
-
-      let errorMessage = "O campo 'mensagem' é obrigatório.";
-      putMessageError(messages[0], errorMessage, 0);
-      if(!putMessageError(messages[0], errorMessage, 0)){
-        putMessageError(messages[1], errorMessage, 0);
-      } else {
-        putMessageError(messages[1], errorMessage, 1);
+        putMessageError(messages[1], strDados, 1);
       }
     })
     .catch((_) => console.log(_));
@@ -236,18 +205,19 @@ btnCad.addEventListener("click", () => {
 
     const data = {
       additionals: arrayAdditionals,
+      anonymous: anonymousCheck,
       message: messages[0].value,
       receiver_characteristics: receivers_characteristics[0].value,
-      receiver_course: receivers_courses[0].value,
+      receiver_course: setValueClass(receivers_courses[0]),
       receiver_name: receivers_names[0].value,
-      receiver_year: receivers_years[0].value,
+      receiver_year: setValueClass(receivers_years[0]),
       sender_tel: sender_tel.value,
-      sender_year: sender_year,
-      sender_course: sender_course,
+      sender_year:  setValueClass(sender_year),
+      sender_course: setValueClass(sender_course),
       sender_name: sender_name.value
     }
 
-    fetch('https://jubilant-space-trout-57r9j445rr427vp7-8000.app.github.dev/letter/store', {
+    fetch('http://127.0.0.1:8000/letter/store', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -255,35 +225,20 @@ btnCad.addEventListener("click", () => {
       body: JSON.stringify(data),
     })
     .then(response => {
-      if(response.status === 200){
+      if(response.status === 200 || response.status === 201){
         window.location.href = "../pagamento/pagamento.html"
       }
       return response.json();
     })
     .then(dados => {
       console.log(dados)
-      if(inputEmpty(sender_name) && !letterAnonymous.checked){
-        let errorSender_name = "O campo 'nome' é obrigatório.";
-        let nameClass = `.error-${sender_name.classList[0]}`
 
-        if(!document.querySelector(nameClass)){
-          messageError(sender_name, errorSender_name);
-        }
-    
-        removeMessageError(sender_name, 0);
-      }
-
-      let errorSenderTel = "O campo 'telefone' é obrigatório.";
-      putMessageError(sender_tel, errorSenderTel, 0);
-
-      let errorReceiverName = "O campo 'nome destinatário' é obrigatório.";
-      putMessageError(receivers_names[0], errorReceiverName, 0);
-
-      let errorCharacteristics = "O campo 'caracteríticas' é obrigatório.";
-      putMessageError(receivers_characteristics[0], errorCharacteristics, 0);
-
-      let errorMessage = "O campo 'mensagem' é obrigatório.";
-      putMessageError(messages[0], errorMessage, 0);
+      let errorSender_name = "O campo 'nome' é obrigatório.";
+      putMessageError(sender_name, errorSender_name, 0);
+      putMessageError(sender_tel, String(dados.sender_tel).replace("sender tel", "telefone"), 0);
+      putMessageError(receivers_names[0], String(dados.receiver_name).replace("receiver name", "destinatário"), 0);
+      putMessageError(receivers_characteristics[0], String(dados.receiver_characteristics).replace("receiver characteristics", "características"), 0);
+      putMessageError(messages[0], dados.message, 0);
     })
     .catch((_) => console.log(_));
   }

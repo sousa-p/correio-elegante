@@ -8,7 +8,7 @@ btnLogin.addEventListener("click", () => {
     password: passwordLogin.value
   }
 
-  const url = 'https://jubilant-space-trout-57r9j445rr427vp7-8000.app.github.dev/admin/login';
+  const url = 'http://127.0.0.1:8000/admin/login';
   fetch(url, {
     method: "POST",
     headers: {
