@@ -2,9 +2,9 @@ const letterCouple = document.querySelector("#checkbox-couple");
 const letterAnonymous = document.querySelector("#checkbox-anonymous");
 
 letterAnonymous.addEventListener("change", () => {
-  let nameSender = document.querySelector("#name-sender");
-  let yearSender = document.querySelector("#year-sender");
-  let classSender = document.querySelector("#class-sender");
+  let nameSender = document.querySelector(".name-sender");
+  let yearSender = document.querySelector(".year-sender");
+  let classSender = document.querySelector(".class-sender");
   if (letterAnonymous.checked) {
     nameSender.value = null;
     yearSender.value = "default";
@@ -20,47 +20,42 @@ letterAnonymous.addEventListener("change", () => {
   }
 });
 
+const addAdditional = document.querySelector(".additional__btn-add");
+letterCouple.addEventListener("change", () => {
+  const disclaimerCombos = document.querySelector(".disclaimer__combos");
+
+  if (letterCouple.checked) {
+    let secondRecipientData = document.createElement("div");
+    secondRecipientData.classList.add("personal__data-recipient");
+
+    let recipientData = document.querySelector(".personal__data-recipient");
+    secondRecipientData.innerHTML = recipientData.innerHTML;
+
+    let divRecipient = document.querySelectorAll(".personal__data")[1];
+    divRecipient.appendChild(secondRecipientData);
+
+    addAdditional.disabled = true;
+    disclaimerCombos.style.display = "block";
+    let additional = document.querySelectorAll(".additional__field");
+    additional.forEach((element) => {
+      element.remove();
+    });
+  } else {
+    let divRecipient = document.querySelectorAll(".personal__data")[1];
+    let secondRecipientData = document.querySelectorAll(".personal__data-recipient")[1];
+    divRecipient.removeChild(secondRecipientData);
+
+    addAdditional.disabled = false;
+    disclaimerCombos.style.display = "none";
+  }
+});
+
 const url = "http://127.0.0.1:8000/additional";
 fetch(url)
   .then((response) => response.json())
   .then((dados) => {
-    const addAdditional = document.querySelector(".additional__btn-add");
-    letterCouple.addEventListener("change", () => {
-      const disclaimerCombos = document.querySelector(".disclaimer__combos");
-
-      if (letterCouple.checked) {
-        let secondRecipientData = document.createElement("div");
-        secondRecipientData.classList.add("personal__data-recipient");
-
-        let recipientData = document.querySelector(".personal__data-recipient");
-        secondRecipientData.innerHTML = recipientData.innerHTML;
-
-        let divRecipient = document.querySelectorAll(".personal__data")[1];
-        divRecipient.appendChild(secondRecipientData);
-
-        addAdditional.disabled = true;
-        disclaimerCombos.style.display = "block";
-        let additional = document.querySelectorAll(".additional__field");
-        additional.forEach((element) => {
-          element.remove();
-        });
-      } else {
-        let divRecipient = document.querySelectorAll(".personal__data")[1];
-        let secondRecipientData = document.querySelectorAll(".personal__data-recipient")[1];
-        divRecipient.removeChild(secondRecipientData);
-
-        addAdditional.disabled = false;
-        disclaimerCombos.style.display = "none";
-      }
-    });
-
-    var arrayAdditionals = [];
-    dados.forEach((item, i) => {
-      arrayAdditionals[i] = item;
-    });
-    arrayAdditionals.shift();
-    arrayAdditionals.pop();
-
+    dados.shift();
+    dados.pop();
     const divAdditional = document.querySelector(".combos__additional");
     addAdditional.addEventListener("click", () => {
       let AdditionalField = document.createElement("div");
@@ -76,7 +71,7 @@ fetch(url)
         </button>
         `;
 
-      arrayAdditionals.forEach((element) => {
+      dados.forEach((element) => {
         let value = String(element.value.toFixed(2)).replace(".", ",");
         let option = `
           <option value="${element.id}">R$${value} ${element.name}</option>
@@ -97,3 +92,88 @@ fetch(url)
     });
   })
   .catch((_) => console.log(_));
+
+const btnCad = document.getElementById("btn-form");
+btnCad.addEventListener("click", () => {
+  const messages = document.querySelectorAll('.message__input');
+  const receivers_characteristics = document.querySelectorAll('.characteristics__input');
+  const receivers_courses = document.querySelectorAll('.class-recipient');
+  const receivers_names = document.querySelectorAll('.name-recipient');
+  const receivers_years = document.querySelectorAll('.year-recipient');
+  const sender_tel = document.querySelector('.phone-sender').value;
+  const sender_year = document.querySelector('.year-sender').value;
+  const sender_course = document.querySelector('.class-sender').value;
+  const sender_name = document.querySelector('.name-sender').value;
+
+  if(letterCouple.checked) {
+  const data = {
+    additional: ['7', '7'],
+    messages: [messages[0].value, messages[1].value],
+    receivers_characteristics: [receivers_characteristics[0].value, receivers_characteristics[1].value],
+    receivers_courses: [receivers_courses[0].value, receivers_courses[1].value],
+    receivers_names: [receivers_names[0].value, receivers_names[1].value],
+    receivers_years: [receivers_years[0].value, receivers_years[1].value],
+    sender_tel: sender_tel,
+    sender_year: sender_year,
+    sender_course: sender_year,
+    sender_name: sender_name
+  }
+
+  fetch('http://127.0.0.1:8000/letter/store/couple', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => {
+      if(response.status === 200){
+        window.location.href = "../pagamento/pagamento.html"
+      }
+      return response.json();
+    })
+    .then(dados => {
+      console.log(dados)
+    })
+    .catch((_) => console.log(_));
+
+  } else {
+    let arrayAdditionals = [];
+    arrayAdditionals = ['1'];
+    additionalSelects = document.querySelectorAll('.additional__select');
+    additionalSelects.forEach(element => {
+      arrayAdditionals.push(element.value);
+    });
+
+    const data = {
+      additionals: arrayAdditionals,
+      message: messages[0].value,
+      receiver_characteristics: receivers_characteristics[0].value,
+      receiver_course: receivers_courses[0].value,
+      receiver_name: receivers_names[0].value,
+      receiver_year: receivers_years[0].value,
+      sender_tel: sender_tel,
+      sender_year: sender_year,
+      sender_course: sender_course,
+      sender_name: sender_name
+    }
+
+    fetch('http://127.0.0.1:8000/letter/store', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => {
+      if(response.status === 200){
+        window.location.href = "../pagamento/pagamento.html"
+      }
+      return response.json();
+    })
+    .then(dados => {
+      console.log(dados)
+    })
+    .catch((_) => console.log(_));
+  }
+})  
