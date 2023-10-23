@@ -27,8 +27,8 @@ class LetterController extends Controller
             'sender_year' => ['string', Rule::in(['1', '2', '3'])],
             'sender_tel' => ['required', 'string', 'size:11'],
             'receiver_name' => ['required', 'string', 'max:255'],
-            'receiver_course' => ['required', 'string', 'max:255'],
-            'receiver_year' => ['required', 'string', Rule::in(['1', '2', '3'])],
+            'receiver_course' => ['string', 'max:255'],
+            'receiver_year' => ['string', Rule::in(['1', '2', '3'])],
             'receiver_characteristics' => ['required', 'string', 'max:200', 'min:1'],
             'additionals' => ['required', 'array'],
             'additionals.*' => ['exists:Additionals,id']
@@ -50,7 +50,6 @@ class LetterController extends Controller
 
         $letter = Letter::create([
             'message' => ucfirst($request->input('message')),
-            'sent' => false,
             'sender_id' => $sender->id,
             'receiver_id' => $receiver->id
         ]);
@@ -102,7 +101,6 @@ class LetterController extends Controller
 
             $letter = Letter::create([
                 'message' => ucfirst($request->input('messages')[$i]),
-                'sent' => false,
                 'sender_id' => $sender->id,
                 'receiver_id' => $receiver->id
             ]);
