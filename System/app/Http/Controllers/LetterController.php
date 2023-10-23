@@ -25,7 +25,7 @@ class LetterController extends Controller
             'sender_name' => ['string', 'max:255'],
             'sender_course' => ['string', 'max:255'],
             'sender_year' => ['string', Rule::in(['1', '2', '3'])],
-            'sender_tel' => ['required', 'string', 'size:11'],
+            'sender_tel' => ['required', 'string', 'size:13'],
             'receiver_name' => ['required', 'string', 'max:255'],
             'receiver_course' => ['string', 'max:255'],
             'receiver_year' => ['string', Rule::in(['1', '2', '3'])],
