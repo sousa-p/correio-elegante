@@ -1,21 +1,53 @@
+var recipientData = document.querySelector(".personal__data-recipient").innerHTML;
+
+const inputPhone = (event) => {
+  let phone = document.querySelector(".phone");
+  phone = event.target;
+  phone.value = maskPhone(phone.value);
+}
+
+const maskPhone = (value) => {
+  if (!value) return ""
+  value = value.replace(/\D/g,'')
+  value = value.replace(/(\d{2})(\d)/,"($1) $2")
+  value = value.replace(/(\d)(\d{4})$/,"$1-$2")
+  return value
+}
+
 function inputEmpty(input){
   return String(input.value).trim() === '';
 }
 
 function messageError(input, message){
   let error = document.createElement('p');
-  error.classList.add("error");
+  let nameClass = `error-${input.classList[0]}`
+  error.classList.add('error');
+  error.classList.add(nameClass);
+
   error.innerHTML = `${message}`
   input.parentElement.appendChild(error);
 }
 
-function removeMessageError(input) {
-  input.addEventListener("keydown", () => {
-    if(!inputEmpty(input)) {
-      let error = document.querySelectorAll(".error");
-      input.parentElement.removeChild(error);
+function removeMessageError(inputErro, i) {
+  inputErro.addEventListener("keyup", () => {
+    if(!inputEmpty(inputErro)) {
+      let nameClass = `.error-${inputErro.classList[0]}`;
+      let error = document.querySelectorAll(nameClass)[i];
+      if(error) {
+        inputErro.parentElement.removeChild(error)
+      }
     }
   });
+}
+
+function putMessageError(input, errorInput, j) {
+  if(inputEmpty(input)){
+    let nameClass = `.error-${input.classList[0]}`
+    if(!document.querySelectorAll(nameClass)[j]){
+      messageError(input, errorInput);
+    }
+    removeMessageError(input, j);
+  }
 }
 
 const letterCouple = document.querySelector("#checkbox-couple");
@@ -48,8 +80,7 @@ letterCouple.addEventListener("change", () => {
     let secondRecipientData = document.createElement("div");
     secondRecipientData.classList.add("personal__data-recipient");
 
-    let recipientData = document.querySelector(".personal__data-recipient");
-    secondRecipientData.innerHTML = recipientData.innerHTML;
+    secondRecipientData.innerHTML = recipientData;
 
     let divRecipient = document.querySelectorAll(".personal__data")[1];
     divRecipient.appendChild(secondRecipientData);
@@ -70,7 +101,7 @@ letterCouple.addEventListener("change", () => {
   }
 });
 
-const url = "http://127.0.0.1:8000/additional";
+const url = "https://jubilant-space-trout-57r9j445rr427vp7-8000.app.github.dev/additional";
 fetch(url)
   .then((response) => response.json())
   .then((dados) => {
@@ -139,7 +170,7 @@ btnCad.addEventListener("click", () => {
     sender_name: sender_name.value
   }
 
-  fetch('http://127.0.0.1:8000/letter/store/couple', {
+  fetch('https://jubilant-space-trout-57r9j445rr427vp7-8000.app.github.dev/letter/store/couple', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -154,26 +185,43 @@ btnCad.addEventListener("click", () => {
     })
     .then(dados => {
       console.log(dados)
-      
-      if(inputEmpty(receivers_names[1])){
-        dados.receiver_names = "O campo 'nome destinatário' é obrigatório."
-        messageError(receivers_names[1], dados.receiver_names);
-        
-        removeMessageError(receivers_names[1]);
+      if(inputEmpty(sender_name) && !letterAnonymous.checked){
+        let errorSender_name = "O campo 'nome' é obrigatório.";
+        let nameClass = `.error-${sender_name.classList[0]}`
+
+        if(!document.querySelector(nameClass)){
+          messageError(sender_name, errorSender_name);
+        }
+    
+        removeMessageError(sender_name, 0);
       }
 
-      if(inputEmpty(receivers_characteristics[1])){
-        dados.receivers_characteristics = "O campo 'caracteríticas' é obrigatório."
-        messageError(receivers_characteristics[1], dados.receivers_characteristics);
-        
-        removeMessageError(receivers_characteristics[1]);
+      console.log(messages);
+      let errorTel = "O campo 'telefone' é obrigatório.";
+      putMessageError(sender_tel, errorTel, 0);
+
+      let errorReceiverName = "O campo 'nome destinatário' é obrigatório.";
+      putMessageError(receivers_names[0], errorReceiverName, 0);
+      if(!putMessageError(receivers_names[0], errorReceiverName, 0)){
+        putMessageError(receivers_names[1], errorReceiverName, 0);
+      } else {
+        putMessageError(receivers_names[1], errorReceiverName, 1);
       }
 
-      if(inputEmpty(messages[1])){
-        dados.message = "O campo 'mensagem' é obrigatório."
-        messageError(messages[1], dados.message);
-        
-        removeMessageError(messages[1]);
+      let errorCharacteristics = "O campo 'caracteríticas' é obrigatório.";
+      putMessageError(receivers_characteristics[0], errorCharacteristics, 0);
+      if(!putMessageError(receivers_characteristics[0], errorCharacteristics, 0)){
+        putMessageError(receivers_characteristics[1], errorCharacteristics, 0);
+      } else {
+        putMessageError(receivers_characteristics[1], errorCharacteristics, 1);
+      }
+
+      let errorMessage = "O campo 'mensagem' é obrigatório.";
+      putMessageError(messages[0], errorMessage, 0);
+      if(!putMessageError(messages[0], errorMessage, 0)){
+        putMessageError(messages[1], errorMessage, 0);
+      } else {
+        putMessageError(messages[1], errorMessage, 1);
       }
     })
     .catch((_) => console.log(_));
@@ -199,7 +247,7 @@ btnCad.addEventListener("click", () => {
       sender_name: sender_name.value
     }
 
-    fetch('http://127.0.0.1:8000/letter/store', {
+    fetch('https://jubilant-space-trout-57r9j445rr427vp7-8000.app.github.dev/letter/store', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -215,40 +263,27 @@ btnCad.addEventListener("click", () => {
     .then(dados => {
       console.log(dados)
       if(inputEmpty(sender_name) && !letterAnonymous.checked){
-        let errorSender_name = "O campo 'nome' é obrigatório."
-        messageError(sender_name, errorSender_name);
-        
-        removeMessageError(sender_name);
+        let errorSender_name = "O campo 'nome' é obrigatório.";
+        let nameClass = `.error-${sender_name.classList[0]}`
+
+        if(!document.querySelector(nameClass)){
+          messageError(sender_name, errorSender_name);
+        }
+    
+        removeMessageError(sender_name, 0);
       }
 
-      if(inputEmpty(sender_tel)){
-        dados.sender_tel = "O campo 'telefone' é obrigatório."
-        messageError(sender_tel, dados.sender_tel);
-        
-        removeMessageError(sender_tel);
-      }
+      let errorSenderTel = "O campo 'telefone' é obrigatório.";
+      putMessageError(sender_tel, errorSenderTel, 0);
 
-      if(inputEmpty(receivers_names[0])){
-        dados.receiver_names = "O campo 'nome destinatário' é obrigatório."
-        messageError(receivers_names[0], dados.receiver_names);
-        
-        removeMessageError(receivers_names[0]);
-      }
+      let errorReceiverName = "O campo 'nome destinatário' é obrigatório.";
+      putMessageError(receivers_names[0], errorReceiverName, 0);
 
-      if(inputEmpty(receivers_characteristics[0])){
-        dados.receivers_characteristics = "O campo 'caracteríticas' é obrigatório."
-        messageError(receivers_characteristics[0], dados.receivers_characteristics);
-        
-        removeMessageError(receivers_characteristics[0]);
-      }
+      let errorCharacteristics = "O campo 'caracteríticas' é obrigatório.";
+      putMessageError(receivers_characteristics[0], errorCharacteristics, 0);
 
-
-      if(inputEmpty(messages[0])){
-        dados.message = "O campo 'mensagem' é obrigatório."
-        messageError(messages[0], dados.message);
-        
-        removeMessageError(messages[0]);
-      }
+      let errorMessage = "O campo 'mensagem' é obrigatório.";
+      putMessageError(messages[0], errorMessage, 0);
     })
     .catch((_) => console.log(_));
   }
