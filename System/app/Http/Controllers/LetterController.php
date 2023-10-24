@@ -22,7 +22,7 @@ class LetterController extends Controller
     {
         $this->validate($request, [
             'message' => ['required', 'string', 'max:255', 'min:1'],
-            'sender_name' => ['string', 'max:255'],
+            'sender_name' => ['required', 'string', 'max:255'],
             'sender_course' => ['nullable', 'string', 'max:255'],
             'sender_year' => ['nullable', 'string', Rule::in(['1', '2', '3'])],
             'anonymous' => ['required', 'boolean'],
@@ -69,7 +69,7 @@ class LetterController extends Controller
             'messages' => ['required', 'array', 'size:2'],
             'messages.*' => ['required', 'string', 'max:255', 'min:1'],
             'anonymous' => ['required', 'boolean'],
-            'sender_name' => ['string', 'max:255'],
+            'sender_name' => ['required', 'string', 'max:255'],
             'sender_course' => ['string', 'max:255'],
             'sender_year' => ['nullable', 'string', Rule::in(['1', '2', '3'])],
             'sender_tel' => ['required', 'string', 'size:15'],
