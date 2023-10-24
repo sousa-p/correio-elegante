@@ -8,7 +8,7 @@ btnLogin.addEventListener("click", () => {
     password: passwordLogin.value
   }
 
-  const url = 'https://expert-bassoon-vjprwwxvw7w2pv54-8000.app.github.dev/admin/login';
+  const url = 'https://refactored-engine-wq54p99xgg725w5g-8000.app.github.dev/admin/login';
   fetch(url, {
     method: "POST",
     headers: {

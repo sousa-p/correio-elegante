@@ -2,7 +2,7 @@ function isAnonymous(value){
   return (value == 0) ? 'NÃO' : 'SIM';
 }
 
-const url = "https://expert-bassoon-vjprwwxvw7w2pv54-8000.app.github.dev/letter";
+const url = "https://refactored-engine-wq54p99xgg725w5g-8000.app.github.dev/letter";
 const token = localStorage.getItem("token");
 fetch(url, {
   method: "GET",
@@ -111,7 +111,7 @@ fetch(url, {
         status: e.target.value,
       }
     
-      const url = `https://expert-bassoon-vjprwwxvw7w2pv54-8000.app.github.dev/letter/update`;
+      const url = `https://refactored-engine-wq54p99xgg725w5g-8000.app.github.dev/letter/update`;
       fetch(url, {
         method: "PATCH",
         headers: {

@@ -15,7 +15,7 @@ class AdminsSeeder extends Seeder
     {
         DB::table('Admins')->insert([
             'login' => 'admin',
-            'password' => password_hash('asdasdasd', PASSWORD_DEFAULT),
+            'password' => password_hash('admincorreiods2023', PASSWORD_DEFAULT),
         ]);
     }
 }

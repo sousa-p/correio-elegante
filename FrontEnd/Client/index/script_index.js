@@ -79,7 +79,7 @@ letterCouple.addEventListener("change", () => {
   }
 });
 
-const url = "https://expert-bassoon-vjprwwxvw7w2pv54-8000.app.github.dev/additional";
+const url = "https://refactored-engine-wq54p99xgg725w5g-8000.app.github.dev/additional";
 fetch(url)
   .then((response) => response.json())
   .then((dados) => {
@@ -190,7 +190,7 @@ btnCad.addEventListener("click", () => {
   }
 
   console.log(data)
-  fetch('https://expert-bassoon-vjprwwxvw7w2pv54-8000.app.github.dev/letter/store/couple', {
+  fetch('https://refactored-engine-wq54p99xgg725w5g-8000.app.github.dev/letter/store/couple', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -256,7 +256,7 @@ btnCad.addEventListener("click", () => {
       sender_name: sender_name.value
     }
 
-    fetch('https://expert-bassoon-vjprwwxvw7w2pv54-8000.app.github.dev/letter/store', {
+    fetch('https://refactored-engine-wq54p99xgg725w5g-8000.app.github.dev/letter/store', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
