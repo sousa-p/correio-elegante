@@ -92,7 +92,7 @@ class LetterController extends Controller
         ]);
 
         $letters = [];
-        $additional = Additional::where('id', $request->input('additionals'))->first();
+        $additional = Additional::where('id', $request->input('additional'))->first();
 
         for ($i = 0; $i < 2; $i++) {
             $receiver = Receiver::create([
