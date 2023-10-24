@@ -34,7 +34,7 @@ class Letter extends Model
      */
     public function sender(): HasOne
     {
-        return $this->hasOne(Sender::class, 'id');
+        return $this->hasOne(Sender::class, 'id', 'sender_id');
     }
 
     /**
@@ -44,7 +44,7 @@ class Letter extends Model
      */
     public function receiver(): HasOne
     {
-        return $this->hasOne(Receiver::class, 'id');
+        return $this->hasOne(Receiver::class, 'id', 'receiver_id');
     }
 
     /**
