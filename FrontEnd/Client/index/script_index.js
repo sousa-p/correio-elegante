@@ -1,5 +1,14 @@
 var recipientData = document.querySelector(".personal__data-recipient").innerHTML;
 
+// Tranfer area
+const btnCopyToTransfer = document.querySelector('#copyToTransfer-btn');
+const textarea = document.querySelector('#copyToTransfer');
+
+btnCopyToTransfer.addEventListener('click', (e) => {
+  e.preventDefault();
+  navigator.clipboard.writeText(textarea.value);
+});
+
 // Phone Mask
 const inputPhone = (event) => {
   let phone = document.querySelector(".phone");
@@ -130,8 +139,8 @@ btnCad.addEventListener("click", () => {
   const receivers_names = document.querySelectorAll('.name-recipient');
   const receivers_years = document.querySelectorAll('.year-recipient');
   const sender_tel = document.querySelector('.phone-sender');
-  const sender_year = document.querySelector('.year-sender').value;
-  const sender_course = document.querySelector('.class-sender').value;
+  const sender_year = document.querySelector('.year-sender');
+  const sender_course = document.querySelector('.class-sender');
   const sender_name = document.querySelector('.name-sender');
   const letterAnonymous = document.querySelector("#checkbox-anonymous");
   var anonymousCheck = (letterAnonymous.checked) ? true : false;
@@ -142,15 +151,16 @@ btnCad.addEventListener("click", () => {
     anonymous: anonymousCheck,
     messages: [messages[0].value, messages[1].value],
     receivers_characteristics: [receivers_characteristics[0].value, receivers_characteristics[1].value],
-    receivers_courses: [setValueClass(receivers_courses[0]), setValueClass(receivers_courses[1])],
+    receivers_courses: [receivers_courses[0].value, receivers_courses[1].value],
     receivers_names: [receivers_names[0].value, receivers_names[1].value],
     receivers_years: [setValueClass(receivers_years[0]), setValueClass(receivers_years[1])],
     sender_tel: sender_tel.value,
     sender_year: setValueClass(sender_year),
-    sender_course: setValueClass(sender_course),
+    sender_course: sender_course.value,
     sender_name: sender_name.value
   }
-
+  
+  console.log(data)
   fetch('http://127.0.0.1:8000/letter/store/couple', {
       method: "POST",
       headers: {
@@ -160,15 +170,15 @@ btnCad.addEventListener("click", () => {
     })
     .then(response => {
       if(response.status === 200 || response.status === 201){
-        window.location.href = "../pagamento/pagamento.html"
+        const modal = document.querySelector('.payment_modal');
+        modal.classList.add("payment_modal-open");
       }
       return response.json();
     })
     .then(dados => {
       console.log(dados)
 
-      let errorSender_name = "O campo 'nome' é obrigatório.";
-      putMessageError(sender_name, errorSender_name, 0);
+      putMessageError(sender_name, String(dados.sender_name).replace("sender name", "nome"), 0);
       putMessageError(sender_tel, String(dados.sender_tel).replace("sender tel", "telefone"), 0);
 
       let strDados = "Campo Obrigatório";
@@ -208,12 +218,12 @@ btnCad.addEventListener("click", () => {
       anonymous: anonymousCheck,
       message: messages[0].value,
       receiver_characteristics: receivers_characteristics[0].value,
-      receiver_course: setValueClass(receivers_courses[0]),
+      receiver_course: receivers_courses[0].value,
       receiver_name: receivers_names[0].value,
       receiver_year: setValueClass(receivers_years[0]),
       sender_tel: sender_tel.value,
       sender_year:  setValueClass(sender_year),
-      sender_course: setValueClass(sender_course),
+      sender_course: sender_course.value,
       sender_name: sender_name.value
     }
 
@@ -226,15 +236,15 @@ btnCad.addEventListener("click", () => {
     })
     .then(response => {
       if(response.status === 200 || response.status === 201){
-        window.location.href = "../pagamento/pagamento.html"
+        const modal = document.querySelector('.payment_modal');
+        modal.classList.add("payment_modal-open");
       }
       return response.json();
     })
     .then(dados => {
       console.log(dados)
 
-      let errorSender_name = "O campo 'nome' é obrigatório.";
-      putMessageError(sender_name, errorSender_name, 0);
+      putMessageError(sender_name, String(dados.sender_name).replace("sender name", "nome"), 0);
       putMessageError(sender_tel, String(dados.sender_tel).replace("sender tel", "telefone"), 0);
       putMessageError(receivers_names[0], String(dados.receiver_name).replace("receiver name", "destinatário"), 0);
       putMessageError(receivers_characteristics[0], String(dados.receiver_characteristics).replace("receiver characteristics", "características"), 0);

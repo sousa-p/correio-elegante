@@ -9,6 +9,22 @@
   <link rel="stylesheet" href="./style_index.css">
   <title>Código Cupido</title>
 </head>
+<div class="payment_modal d-flex justify-content-center">
+  <div class="payment_pix  d-flex flex-column justify-content-center align-items-center">
+    <h4><span class="amount__title">Total: </span>R$00,00</h4>
+
+    <div class="qrcode d-flex justify-content-center">
+      <img src="../../assets/img/QRCode PIX.jpg" alt="">
+    </div>
+    <p class="qrcode_name">Milena Bezerra Nascimento</p>
+
+    <div class="copyToTransfer form-group d-flex flex-column align-items-center">
+      <label for="copyToTransfer">Chave PIX:</label>
+      <textarea class="form-control" id="copyToTransfer" disabled>477.489.218-14</textarea>
+      <button class="form__btn" id="copyToTransfer-btn">Copiar para área de transferência</button>
+    </div>
+  </div>
+</div>
 <body class="d-flex flex-column align-items-center">
   <header>
     <div class="logo">
@@ -24,7 +40,7 @@
     <div class="disclaimer">
       <p>Cada bilhete custa R$1,50 mais o valor dos adicionais que você escolher! 😋</p>
       <p>Caso você ou seu(s) destinatário(s) não seja aluno ETEC/FATEC ou não tenha seu curso, deixe o campo <b>"Ano"</b> e <b>"Sala"</b> em branco.</p>
-      <p>Pelo site aceitamos apenas pedidos via pix, caso prefira pagamento em dinheiro faça seu pedido direto no ponto de venda localizado no *insira local de venda*.</p>
+      <p>Pelo site aceitamos apenas pedidos via pix, caso prefira pagamento em dinheiro faça seu pedido direto no ponto de venda <b>localizado em frente ao Salão Nobre</b>.</p>
     </div>
 
     <div class="form__container">
@@ -125,6 +141,10 @@
             </div>
             <div class="combos__additional d-flex flex-wrap justify-content-between w-100"></div>
           </div>
+        </div>
+        <div class="disclaimer disclaimer__couple">
+          <p>O pedido começará a ser produzido após o recebimento do pagamento.</p>
+          <p>Confirme o nome da pessoa que receberá a carta no campo de "Descrição" do PIX.</p>
         </div>
         <button type="button" id="btn-form" class="form__btn">Pagar</button>
       </form>

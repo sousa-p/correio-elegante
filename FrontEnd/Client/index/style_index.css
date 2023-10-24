@@ -1,3 +1,7 @@
+main{
+  padding-bottom: 40px;
+}
+
 .title {
   margin: 10px 0;
   width: 320px;
@@ -119,31 +123,63 @@ select:disabled{
   margin: 15px 10px;
 }
 
-/* PAY */
-.purchase__amount{
-  padding: 0 30px;
+/* Payment */
+.payment_modal{
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 3;
+  transform: translateY(100%);
+  transition: .5s;
 }
 
-.purchase__amount h3{
-  color: var(--secondary-color);
+.payment_modal-open{
+  transform: translateY(0%);
 }
 
-.amount{
-  padding: 5px 0;
+.payment_pix{
+  max-width: 400px;
+  height: 100vh;
+  background: var(--light-color);
+}
+
+.qrcode img{
+  width: 90%;
+}
+
+.copyToTransfer{
+  margin: 10px 0;
+}
+
+.qrcode_name{
+  margin-top: 10px !important;
+  color: var(--primary-color);
+}
+
+#copyToTransfer{
+  width: 240px;
+  max-height: 30px;
+}
+
+#copyToTransfer{
+  font-size: 1.3rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+#copyToTransfer-btn{
+  width: 240px;
+  height: 60px;
+  margin: 0;
+  border: 0;
+  border-radius: 8px;
+  background: var(--secondary-color);
+  color: white;
+  font-weight: 600;
+  text-transform: none;
 }
 
 .amount__title{
   font-weight: 600;
   color: var(--primary-color);
-}
-
-.amount__prices{
-  margin-bottom: 10px;
-  border-bottom: 2px solid var(--primary-color);
-}
-
-.amount__prices p{
-  width: 60%;
-  display: flex;
-  justify-content: space-between;
 }
