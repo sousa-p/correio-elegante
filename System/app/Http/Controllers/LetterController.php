@@ -104,7 +104,7 @@ class LetterController extends Controller
 
             $letter = Letter::create([
                 'message' => ucfirst($request->input('messages')[$i]),
-                'anonymous' => ['required', 'boolean'],
+                'anonymous' => $request->input('anonymous'),
                 'sender_id' => $sender->id,
                 'receiver_id' => $receiver->id
             ]);
@@ -115,13 +115,14 @@ class LetterController extends Controller
         return response()->json($letters, 201);
     }
 
-    public function update (Request $request) {
+    public function update(Request $request)
+    {
         $this->validate($request, [
             'id' => ['required', 'exists:Letters,id'],
             'status' => ['required', 'string', Rule::in(['Aguardando Pagamento', 'Pendente de Envio', 'Enviado'])]
         ]);
 
-        $letter = Letter::find( $request->input('id'));
+        $letter = Letter::find($request->input('id'));
         $letter->status = $request->input('status');
         $letter->save();
 
