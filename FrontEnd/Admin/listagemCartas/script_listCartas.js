@@ -2,7 +2,7 @@ function isAnonymous(value){
   return (value == 0) ? 'NÃO' : 'SIM';
 }
 
-const url = "http://127.0.0.1:8000/letter";
+const url = "https://expert-bassoon-vjprwwxvw7w2pv54-8000.app.github.dev/letter";
 const token = localStorage.getItem("token");
 fetch(url, {
   method: "GET",
@@ -62,7 +62,7 @@ fetch(url, {
         </div>
       </div>
       <div class="card__status">
-        <select name="status" id="status">
+        <select name="status"  id="${element.id}" class="status">
         <option value="${element.status}" select hidden>${element.status}</option>
         <option value="Aguardando Pagamento">Aguardando Pagamento</option>
         <option value="Pendente de Envio">Pendente de Envio</option>
@@ -103,20 +103,20 @@ fetch(url, {
     });
 
     
-  const selectStatus = document.querySelectorAll("#status");
+  const selectStatus = document.querySelectorAll(".status");
   selectStatus.forEach(element => {
-    element.addEventListener("change", () => {
-      console.log(element)
+    element.addEventListener("change", (e) => {
       const data = {
-        id: selectStatus.selectedIndex,
-        status: selectStatus.value,
+        id: e.target.id,
+        status: e.target.value,
       }
     
-      const url = `http://127.0.0.1:8000/letter/id/update`;
+      const url = `https://expert-bassoon-vjprwwxvw7w2pv54-8000.app.github.dev/letter/update`;
       fetch(url, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       })

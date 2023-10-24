@@ -141,7 +141,7 @@ header{
   min-height: 100px !important;
 }
 
-#status{
+.status{
   border-radius: 0 0 8px 8px;
   border: 0;
   padding: 10px;
@@ -150,6 +150,6 @@ header{
   outline: none;
 }
 
-#status:focus{
+.status:focus{
   filter: brightness(90%);
 }
