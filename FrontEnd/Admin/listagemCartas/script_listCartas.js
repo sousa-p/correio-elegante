@@ -1,3 +1,7 @@
+function isAnonymous(value){
+  return (value == 0) ? 'NÃO' : 'SIM';
+}
+
 const url = "http://127.0.0.1:8000/letter";
 const token = localStorage.getItem("token");
 fetch(url, {
@@ -23,7 +27,7 @@ fetch(url, {
         </div>
         <div class="d-flex">
           <p class="title">Sala:</p>
-          <p class="text">${element.receiver.year}º ${element.receiver.course}</p>
+          <p class="text text__Year">${element.receiver.year}º${element.receiver.course}</p>
         </div>
       </div>
       <div class="card__content content__d-none">
@@ -46,6 +50,10 @@ fetch(url, {
           <div class="d-flex">
             <p class="title">Telefone:</p>
             <p class="text">${element.sender.tel}</p>
+          </div>       
+          <div class="d-flex w-100">
+            <p class="title">Anônimo:</p>
+            <p class="text">${isAnonymous(element.anonymous)}</p>
           </div>       
         </div>
         <div class="info d-flex flex-column justify-content-between">
@@ -93,5 +101,32 @@ fetch(url, {
         ? "2px solid var(--tertiary-color)" : "0";
       });
     });
+
+    
+  const selectStatus = document.querySelectorAll("#status");
+  selectStatus.forEach(element => {
+    element.addEventListener("change", () => {
+      console.log(element)
+      const data = {
+        id: selectStatus.selectedIndex,
+        status: selectStatus.value,
+      }
+    
+      const url = `http://127.0.0.1:8000/letter/id/update`;
+      fetch(url, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+      .then(response => {
+        console.log(response.status)
+        return response.json()}
+        )
+      .then(dados => {console.log(dados)})
+      .catch((_) => {console.log(_)})
+    });
+  });
   })
   .catch((_) => console.log(_));

@@ -85,43 +85,58 @@ fetch(url)
   .then((dados) => {
     dados.shift();
     dados.pop();
+    var arOptions = [];
+    var items = 0;
+    dados.forEach((element, i) => {
+      let value = String(element.value.toFixed(2)).replace(".", ",");
+      let option = `
+      <option class="${value} optionElement" value="${element.id}">R$${value} ${element.name}</option>
+      `;
+      arOptions[i] = option;
+      items++;
+    });
     const divAdditional = document.querySelector(".combos__additional");
     addAdditional.addEventListener("click", () => {
-      let AdditionalField = document.createElement("div");
-      AdditionalField.classList.add("additional__field");
-
-      let AdditionalInnerSelect = document.createElement("select");
-      AdditionalInnerSelect.classList.add("additional__select");
-
-      let AdditionalInnerBtn = `
-        <button type="button" class="additional__btn-remove">
-          Remover
-          <img src="../../assets/img/minus-outline.svg" alt="">
-        </button>
-        `;
-
-      dados.forEach((element) => {
-        let value = String(element.value.toFixed(2)).replace(".", ",");
-        let option = `
-          <option value="${element.id}">R$${value} ${element.name}</option>
+      if(items > 0){
+        let AdditionalField = document.createElement("div");
+        AdditionalField.classList.add("additional__field");
+  
+        let AdditionalInnerSelect = document.createElement("select");
+        AdditionalInnerSelect.classList.add("additional__select");
+  
+        let AdditionalInnerBtn = `
+          <button type="button" class="additional__btn-remove">
+            Remover
+            <img src="../../assets/img/minus-outline.svg" alt="">
+          </button>
           `;
-        AdditionalInnerSelect.innerHTML += option;
-      });
+  
+        AdditionalInnerSelect.innerHTML += arOptions.toString();
+  
+        AdditionalField.appendChild(AdditionalInnerSelect);
+        AdditionalField.innerHTML += AdditionalInnerBtn;
+        divAdditional.appendChild(AdditionalField);
+        // console.log(arOptions)
+        // console.log(AdditionalInnerSelect.options)
+        // let a = document.createElement("div");
+        // a.appendChild(lastOption)
+        // console.log(lastOption);
+        // console.log(a);
+        // console.log(a.innerHTML);
 
-      AdditionalField.appendChild(AdditionalInnerSelect);
-      AdditionalField.innerHTML += AdditionalInnerBtn;
-      divAdditional.appendChild(AdditionalField);
-
+        // console.log(arOptions.indexOf(a.innerHTML))
+        items--;
+      }
       let removeAdditional = document.querySelectorAll(".additional__btn-remove");
       removeAdditional.forEach((element) => {
         element.addEventListener("click", () => {
           element.parentElement.remove();
         });
+        items++;
       });
     });
   })
   .catch((_) => console.log(_));
-
 
   function setValueClass(select){
     if(select.value == '') {
@@ -132,7 +147,19 @@ fetch(url)
   }
 
 const btnCad = document.getElementById("btn-form");
+var total = 1.5;
 btnCad.addEventListener("click", () => {
+  const select = document.querySelectorAll(".additional__select") 
+  select.forEach(element => {
+    let lastOption = element.options[element.selectedIndex].classList[0];
+    total += Number(lastOption.replace(",", "."))
+    console.log(lastOption);
+  });
+
+  const price = document.querySelector(".amount__title");
+  price.innerHTML = `Total: R$${total.toFixed(2)}`
+  console.log(total);
+
   const messages = document.querySelectorAll('.message__input');
   const receivers_characteristics = document.querySelectorAll('.characteristics__input');
   const receivers_courses = document.querySelectorAll('.class-recipient');
@@ -146,6 +173,8 @@ btnCad.addEventListener("click", () => {
   var anonymousCheck = (letterAnonymous.checked) ? true : false;
 
   if(letterCouple.checked) {
+  price.innerHTML = `Total: R$2.50`
+  
   const data = {
     additional: ['7', '7'],
     anonymous: anonymousCheck,
@@ -159,7 +188,7 @@ btnCad.addEventListener("click", () => {
     sender_course: sender_course.value,
     sender_name: sender_name.value
   }
-  
+
   console.log(data)
   fetch('http://127.0.0.1:8000/letter/store/couple', {
       method: "POST",
@@ -208,7 +237,7 @@ btnCad.addEventListener("click", () => {
   } else {
     let arrayAdditionals = [];
     arrayAdditionals = ['1'];
-    additionalSelects = document.querySelectorAll('.additional__select');
+    let additionalSelects = document.querySelectorAll('.additional__select');
     additionalSelects.forEach(element => {
       arrayAdditionals.push(element.value);
     });

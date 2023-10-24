@@ -11,7 +11,7 @@
 </head>
 <div class="payment_modal d-flex justify-content-center">
   <div class="payment_pix  d-flex flex-column justify-content-center align-items-center">
-    <h4><span class="amount__title">Total: </span>R$00,00</h4>
+    <h4 class="amount__title"></h4>
 
     <div class="qrcode d-flex justify-content-center">
       <img src="../../assets/img/QRCode PIX.jpg" alt="">
@@ -133,8 +133,11 @@
           </div>
 
           <div class="combos d-flex flex-column align-items-center w-100">
-            <div class="combos__btn">
+            <div class="combos__btn d-flex flex-column align-items-center">
               <button type="button" class="additional__btn-add form__btn">Comprar Adicionais</button>
+              <div class="disclaimer disclaimer__couple">
+                <p>Aceitamos apenas um tipo de cada adicional por pedido.</p>
+              </div>
               <div class="disclaimer disclaimer__combos">
                 <p>A opção "Eu Shippo" não permite compras adicionais.*</p>
               </div>
